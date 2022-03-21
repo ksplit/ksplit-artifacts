@@ -2,3 +2,7 @@
 	path = idl
 	url = https://gitlab.flux.utah.edu/xcap/lcds-idl.git
 	shallow = true
+[submodule "linux"]
+	path = linux
+	url = https://github.com/mars-research/lvd-linux/
+	shallow = true

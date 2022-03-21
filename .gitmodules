@@ -1,0 +1,4 @@
+[submodule "idl"]
+	path = idl
+	url = https://gitlab.flux.utah.edu/xcap/lcds-idl.git
+	shallow = true

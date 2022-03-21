@@ -6,3 +6,6 @@
 	path = linux
 	url = https://github.com/mars-research/lvd-linux/
 	shallow = true
+[submodule "pdg"]
+	path = pdg
+	url = https://github.com/ARISTODE/program-dependence-graph

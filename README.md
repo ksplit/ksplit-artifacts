@@ -37,3 +37,26 @@ make
 ```
 
 ```
+
+### Table 4
+* TODO - need LVDs kernel setup
+
+* Compile the LVDs module
+```
+cd /opt/ksplit/linux/lcd-domains
+make
+```
+* Check if we are running the LVDs kernel
+```
+uname -r
+4.8.4-lvd
+```
+
+* Insert `vmfunc_klcd` module
+```
+cd ..
+# load lcd-domains.ko
+sudo ./scripts/mk
+# load the test module that runs marshalling overheads test
+sudo ./scripts/loadex vmfunc_klcd
+```

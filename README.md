@@ -17,7 +17,7 @@ All the experiments are evaluated on a Dell PowerEdge R820 machine on the
 * Create an experiment from the below github profile repository. The profile
   comes pre-installed with LVDs kernel for testing the drivers. (TODO)
 ```
-https://github.com/arkivm/cloudlab-profiles
+https://github.com/mars-research/ksplit-cloudlab
 ```
 
 * Everything should be setup automatically at `/opt/ksplit/`

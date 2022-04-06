@@ -24,7 +24,7 @@ https://github.com/arkivm/cloudlab-profiles
 
 ## Experiments
 
-### Table2
+### Table 1
 
 * Compile Program dependence graph from the cloned sources
 ```
@@ -36,6 +36,15 @@ make
 * Run a simple test program
 ```
 
+```
+
+### Table 2
+* Follow build steps for generating Table 1
+
+*
+```
+cd /opt/ksplit/bc-files
+# run_table2.sh
 ```
 
 ### Table 4

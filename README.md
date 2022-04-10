@@ -12,15 +12,22 @@ All the experiments are evaluated on a Dell PowerEdge R820 machine on the
 * Create an account on [Cloudlab](https://www.cloudlab.us/) and login.
 
 ### Configuring the experiment
-* Start an experiment by creating a node of type `d820`
 
-* Create an experiment from the below github profile repository. The profile
-  comes pre-installed with LVDs kernel for testing the drivers. (TODO)
+* Create an experiment profile by selecting
+  `Experiments > Create Experiment profile`
+
+* Select `Git Repo` and use this repository. The profile comes pre-installed
+  with source code for evaluating ksplit's static analysis.
 ```
 https://github.com/mars-research/ksplit-cloudlab
 ```
 
-* Everything should be setup automatically at `/opt/ksplit/`
+* Populate the name field and click `Create`
+
+* If successful, instantiate the created profile by clicking `Instantiate`
+  button on the left pane.
+
+
 
 ## Experiments
 
@@ -48,24 +55,36 @@ cd /opt/ksplit/bc-files
 ```
 
 ### Table 4
-* TODO - need LVDs kernel setup
-
-* Compile the LVDs module
+1. The kernel should automatically be built by the profile creation script. If
+  not, you can build the kernel with
 ```
-cd /opt/ksplit/linux/lcd-domains
+cd /opt/ksplit/lvd-kernel
+cp config_lvd .config
+make -j $(nproc)
+```
+
+2. Compile the LVD modules (base microkernel and test modules)
+```
+cd /opt/ksplit/lvd-linux/lcd-domains
 make
 ```
-* Check if we are running the LVDs kernel
+
+3. Check if we are running the LVDs kernel
 ```
 uname -r
 4.8.4-lvd
 ```
 
-* Insert `vmfunc_klcd` module
+4. Load `vmfunc_klcd` module
 ```
 cd ..
 # load lcd-domains.ko
 sudo ./scripts/mk
 # load the test module that runs marshalling overheads test
 sudo ./scripts/loadex vmfunc_klcd
+```
+
+* In another terminal, check the dmesg
+```
+sudo dmesg
 ```

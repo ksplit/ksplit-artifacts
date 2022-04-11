@@ -31,28 +31,75 @@ https://github.com/mars-research/ksplit-cloudlab
 
 ## Experiments
 
-### Table 1
+### Building KSplit Static Analyses
 
-* Compile Program dependence graph from the cloned sources
+Compile Program dependence graph from the cloned sources
 ```
 cd /opt/ksplit/pdg
 mkdir build && cd build
 cmake ..
 make
 ```
-* Run a simple test program
-```
 
-```
 
-### Table 2
-* Follow build steps for generating Table 1
+### Table 1.a - 1.e Replication
 
-*
+ ```bash
+ ./run_benchmarks.sh # run the 10 isolated benchmarks
+ ./collect_benchmarks.sh # after all experiments finish, collect the stats
+ cd benchmark_stats # the experiment number for each benchmark is included in the corresponding file name (dummy is null_net).
+ ```
+
+### Table 1.f Replication
+ (Vikram, gcov)
+
+ ### Table 1.g Replication
+ ```bash
+ cd IDL_manual_effort
+ cd driver_dir
+ ```
+manual compare manually written IDL with automatically generated IDL.
+
+manual IDL is prefixed with `manual_` and automatically generated IDL is prefixed with `auto_`.
+ 
+### Table 2 (Subsystem stats)
+
+Enter each subsystem's directory and run script to iterate through drivers
+
+```bash
+# char/tty
+cd char
+sudo bash ../run_subsystem.sh
+cd ../tty
+sudo bash ../run_subsystem.sh
+# block
+cd ../block
+sudo bash ../run_subsystem.sh
+# net
+cd ../net
+sudo bash ../run_subsystem.sh
+# edac
+cd ../edac
+sudo bash ../run_subsystem.sh
+# hwmon
+cd ../hwmon
+sudo bash ../run_subsystem.sh
+#spi/i2c
+cd ../spi
+sudo bash ../run_subsystem.sh
+cd ../i2c
+sudo bash ../run_subsystem.sh
+# usb
+cd ../usb
+sudo bash ../run_subsystem.sh
 ```
-cd /opt/ksplit/bc-files
-# run_table2.sh
+### Table 3 (Similarity)
+```bash
+cd ../table_3_IDL/net/
+cd ../table_3_IDL/edac/
 ```
+Compare the IDL between ixgbe, null_net and alx.
+Compare the IDL between skx_edac and sb_edac.
 
 ### Table 4
 1. The kernel should automatically be built by the profile creation script. If

@@ -27,33 +27,36 @@ https://github.com/mars-research/ksplit-cloudlab
 * If successful, instantiate the created profile by clicking `Instantiate`
   button on the left pane.
 
-
-
 ## Experiments
 
+### Prerequisites
+* The following steps assume that the experiment profile is created using the
+  aforementioned steps (i.e., using the git repo for creating the profile).
+
+* To create this setup manually,
+  - Clone https://github.com/mars-research/ksplit-cloudlab
+  - Make sure `/opt/ksplit` is writable
+  - Execute `ksplit-top.sh`
+
 ### Building KSplit Static Analyses
-
-Compile Program dependence graph from the cloned sources
-```
-cd /opt/ksplit/pdg
-mkdir build && cd build
-cmake ..
-make
-```
-
+* The pdg sources should automatically be built for you. If not, refer to the
+  Prerequisites subsection above to set it up manually.
 
 ### Table 1.a - 1.e Replication
 
  ```bash
+ pushd /opt/ksplit/bc-files
  ./run_benchmarks.sh # run the 10 isolated benchmarks
  ./collect_benchmarks.sh # after all experiments finish, collect the stats
- cd benchmark_stats # the experiment number for each benchmark is included in the corresponding file name (dummy is null_net).
+ pushd benchmark_stats # the experiment number for each benchmark is included in the corresponding file name (dummy is null_net).
+ popd
+ popd
  ```
 
 ### Table 1.f Replication
  (Vikram, gcov)
 
- ### Table 1.g Replication
+### Table 1.g Replication
  ```bash
  cd IDL_manual_effort
  cd driver_dir
@@ -67,39 +70,19 @@ manual IDL is prefixed with `manual_` and automatically generated IDL is prefixe
 Enter each subsystem's directory and run script to iterate through drivers
 
 ```bash
-# char/tty
-cd char
-sudo bash ../run_subsystem.sh
-cd ../tty
-sudo bash ../run_subsystem.sh
-# block
-cd ../block
-sudo bash ../run_subsystem.sh
-# net
-cd ../net
-sudo bash ../run_subsystem.sh
-# edac
-cd ../edac
-sudo bash ../run_subsystem.sh
-# hwmon
-cd ../hwmon
-sudo bash ../run_subsystem.sh
-#spi/i2c
-cd ../spi
-sudo bash ../run_subsystem.sh
-cd ../i2c
-sudo bash ../run_subsystem.sh
-# usb
-cd ../usb
-sudo bash ../run_subsystem.sh
+for subsys in char tty block net edac hwmon spi i2c usb; do
+  pushd ${subsys};
+  sudo bash ../run_subsystem.sh
+  popd;
+done
 ```
 ### Table 3 (Similarity)
 ```bash
 cd ../table_3_IDL/net/
 cd ../table_3_IDL/edac/
 ```
-Compare the IDL between ixgbe, null_net and alx.
-Compare the IDL between skx_edac and sb_edac.
+Compare the IDL between `ixgbe`, `null_net` and `alx`.
+Compare the IDL between `skx_edac` and `sb_edac`.
 
 ### Table 4
 1. The kernel should automatically be built by the profile creation script. If

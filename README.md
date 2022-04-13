@@ -69,9 +69,10 @@ https://github.com/mars-research/ksplit-cloudlab
 
  ```bash
  pushd /opt/ksplit/bc-files
- ./run_benchmarks.sh # run the 10 isolated benchmarks
- ./collect_benchmarks.sh # after all experiments finish, collect the stats
+ sudo run_benchmarks.sh # run the 10 isolated benchmarks, wait for all benchmarks to terminate
+ sudo bash collect_benchmarks.sh # after all experiments finish, collect the stats
  pushd benchmark_stats # the experiment number for each benchmark is included in the corresponding file name (dummy is null_net).
+ sudo python3 merge_to_csv.py # merge all the benchmark stats into one file "merged_stats.csv"
  popd
  popd
  ```
@@ -95,10 +96,12 @@ Enter each subsystem's directory and run script to iterate through drivers
 ```bash
 for subsys in char tty block net edac hwmon spi i2c usb; do
   pushd ${subsys};
-  sudo bash ../run_subsystem.sh
+  sudo bash ../run_subsystem.sh # run ksplit analysis on all the drivers in the subsystem
+  sudo python3 ../summarize_module_stats.py # summarize the average number for all the drivers in the subsystem into file stats_summary
   popd;
 done
 ```
+
 ### Table 3 (Similarity)
 ```bash
 cd ../table_3_IDL/net/

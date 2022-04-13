@@ -42,6 +42,14 @@ https://github.com/mars-research/ksplit-cloudlab
 * The script that gets executed after startup is available
   [here](https://github.com/mars-research/ksplit-cloudlab/blob/ksplit-test/ksplit-top.sh)
 
+* *NOTE* The automated script is executed by a different user (`geniuser`). If
+  you need to manually build something under `/opt/ksplit` make sure to change
+  ownership.
+  ```
+  pushd /opt/ksplit
+  sudo chown -R <your-user-name>:<your-group> .
+  ```
+
 ## Experiments
 
 ### Prerequisites

@@ -130,31 +130,52 @@ Compare the IDL between `ixgbe`, `null_net` and `alx`.
 Compare the IDL between `skx_edac` and `sb_edac`.
 
 ### Table 4
-1. The kernel should automatically be built by the profile creation script. If
-  not, you can build the kernel with
-```
-cd /opt/ksplit/lvd-kernel
-cp config_lvd .config
-make -j $(nproc)
-```
-
-2. Compile the LVD modules (base microkernel and test modules)
-```
-cd /opt/ksplit/lvd-linux/lcd-domains
-make
-```
-
-3. Check if we are running the LVDs kernel
+1. Following the above steps, the node should be running the `4.8.4-lvd` kernel.
 ```
 uname -r
 4.8.4-lvd
 ```
 
-4. Loading the test module
+2. Insert bareflank hypervisor module
+```
+cd /opt/ksplit/bflank/build
+make driver_quick && make quick
+```
+
+You should see similar messages on the console
+```
+Scanning dependencies of target driver_quick
+Scanning dependencies of target driver_unload
+Built target driver_unload
+Scanning dependencies of target driver_clean
+Built target driver_clean
+Scanning dependencies of target driver_build
+Built target driver_build
+Scanning dependencies of target driver_load
+Built target driver_load
+Built target driver_quick
+Scanning dependencies of target quick
+Built target quick
+```
+
+In `dmesg`, you should see
+```
+[ 2682.962046] [BAREFLANK DEBUG]: dev_init succeeded
+[ 2683.051737] [BAREFLANK DEBUG]: dev_open succeeded
+[ 2683.081715] [BAREFLANK DEBUG]: IOCTL_ADD_MODULE_LENGTH: succeeded
+[ 2683.082097] [BAREFLANK DEBUG]: IOCTL_ADD_MODULE: succeeded
+[ 2683.494023] [BAREFLANK DEBUG]: IOCTL_LOAD_VMM: succeeded
+[ 2683.494046] [BAREFLANK DEBUG]: dev_release succeeded
+[ 2683.501491] [BAREFLANK DEBUG]: dev_open succeeded
+[ 2694.136286] [BAREFLANK DEBUG]: IOCTL_START_VMM: succeeded
+[ 2694.136330] [BAREFLANK DEBUG]: dev_release succeeded
+```
+
+4. Loading the test module.
 
 * Load `vmfunc_klcd` module
 ```
-cd ..
+cd /opt/ksplit/lvd-kernel/lcd-domains
 # load lcd-domains.ko
 sudo ./scripts/mk
 # load the test module that runs marshalling overheads test
@@ -169,7 +190,7 @@ message from lcd ffff881421cbd800: ===============
 message from lcd ffff881421cbd800:   LCD BOOTED
 message from lcd ffff881421cbd800: ===============
 Running marshal_empty test!
-test_marshal_empty: 1000000 iterations of marshal int took 538368116 cycles (avg: 538 cycles)
+test_marshal_empty: 1000000 iterations of marshal none took 530368116 cycles (avg: 530 cycles)
 Running marshal_int test!
 test_marshal_int: 1000000 iterations of marshal int took 537546720 cycles (avg: 537 cycles)
 Running marshal_array test!

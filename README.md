@@ -27,7 +27,8 @@ https://github.com/mars-research/ksplit-cloudlab
 * If successful, instantiate the created profile by clicking `Instantiate`
   button on the left pane.
 
-* The following repositories are automatically cloned and built, once the system is booted.
+* The following repositories are automatically cloned and built, once the
+  system is booted.
   - `pdg` - Static analyses
   - `lvd-linux` - modified LVDs kernel
   - `bflank` - modified bareflank hypervisor
@@ -35,9 +36,23 @@ https://github.com/mars-research/ksplit-cloudlab
 
 * Please allow sometime to clone and build all the source code. You can check
   the progress by tailing the log file.
-  ```
-  tail -f /users/geniuser/ksplit-verbose.log
-  ```
+
+* A short log is located at `/users/geniuser/ksplit-setup.log`. If the setup is
+  successful, the short log should contain
+```
+Downloading llvm script to /users/geniuser/llvm.sh
+Preparing local partition ...
+Cloning PDG
+Cloning Bareflank
+Cloning LVD linux
+Cloning bc-files
+Building PDG
+Building PDG
+Building bareflank
+Building Linux
+```
+
+* A detailed log is available at `/users/geniuser/ksplit-verbose.log`
 
 * The script that gets executed after startup is available
   [here](https://github.com/mars-research/ksplit-cloudlab/blob/ksplit-test/ksplit-top.sh)

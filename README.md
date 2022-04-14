@@ -38,18 +38,22 @@ https://github.com/mars-research/ksplit-cloudlab
   the progress by tailing the log file.
 
 * A short log is located at `/users/geniuser/ksplit-setup.log`. If the setup is
-  successful, the short log should contain
+  successful, the short log should contain something similar to the one below
 ```
-Downloading llvm script to /users/geniuser/llvm.sh
-Preparing local partition ...
-Cloning PDG
-Cloning Bareflank
-Cloning LVD linux
-Cloning bc-files
-Building PDG
-Building PDG
-Building bareflank
-Building Linux
+[Thu Apr 14 00:55:13 CDT 2022] Begin setup!
+[Thu Apr 14 00:55:13 CDT 2022] Installing dependencies...
+[Thu Apr 14 00:55:21 CDT 2022] Downloading llvm script to /users/geniuser/llvm.sh
+[Thu Apr 14 00:55:28 CDT 2022] Preparing local partition ...
+[Thu Apr 14 00:55:39 CDT 2022] Cloning PDG
+[Thu Apr 14 00:55:39 CDT 2022] Cloning Bareflank
+[Thu Apr 14 00:55:40 CDT 2022] Cloning LVD linux
+[Thu Apr 14 00:57:14 CDT 2022] Cloning bc-files
+[Thu Apr 14 01:07:51 CDT 2022] Building SVF
+[Thu Apr 14 01:07:51 CDT 2022] Building PDG
+[Thu Apr 14 01:07:52 CDT 2022] Building bareflank
+[Thu Apr 14 01:10:41 CDT 2022] Building Linux
+[Thu Apr 14 01:15:46 CDT 2022] Building lcd-domains
+[Thu Apr 14 01:18:56 CDT 2022] Done Setting up!
 ```
 
 * A detailed log is available at `/users/geniuser/ksplit-verbose.log`

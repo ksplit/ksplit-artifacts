@@ -207,3 +207,50 @@ test_marshal_voidptr: 1000000 iterations of marshal void ptr (sz=4096) took 8869
 Running marshal_union test!
 test_marshal_union: 1000000 iterations of marshal union took 700801680 cycles (avg: 700 cycles)
 ```
+
+### End-to-End examples
+
+#### `msr` driver
+
+`msr` driver is located at `/opt/ksplit/lvd-linux/arch/x86/kernel/msr.c`
+
+1) First step is to gather the bc files. For performing the analysis, we need
+  two bc files, `msr_driver.bc` and `msr_kernel.bc`. The bc files for msr are
+  available at `/opt/ksplit/bc-files/arch_x86/msr/`
+
+2) Run static analysis to generate the idl. TODO: Yongzhe
+
+3) Copy the auto-generated idl to a new folder under `/opt/ksplit/lvd-linux/lcd-domains/test_mods/`. (e.g., `msr_autogen`)
+
+4) Create entries in the configuration script and Kbuild.
+- Add config entry to `/opt/ksplit/lvd-linux/lcd-domains/scripts/defaultconfig`
+```
+msr_autogen/boot nonisolated
+msr_autogen/msr_lcd isolated
+msr_autogen/msr_klcd nonisolated
+```
+- Add Kbuild entry to `/opt/ksplit/lvd-linux/lcd-domains/scripts/Kbuild.test_mods`
+```
+obj-m += msr_autogen/
+```
+
+5) The isolated module needs a bunch of boilerplate code to bootstrap. All the
+necessary files are available in this repo under `msr_autogen` folder. After
+the above steps, you can copy all the files under `msr_autogen` to the
+directory created in step2.
+
+6) Compile the newly auto-generated module
+```
+cd /opt/ksplit/lvd-linux/lcd-domains/
+rm test_mods/config
+make test_mods
+```
+
+7) Load the hypervisor. Follow step 2 under Table4 experiments above
+
+8) Load the microkernel and msr_autogen
+```
+cd /opt/ksplit/lvd-linux/lcd-domains/
+./scripts/mk
+./scripts/loadex msr_autogen
+```

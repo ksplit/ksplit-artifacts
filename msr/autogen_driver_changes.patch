@@ -1,0 +1,71 @@
+diff -Naur msr_autogen.orig/client.c msr_autogen/client.c
+--- msr_autogen.orig/client.c	2022-04-15 14:02:09.640850369 -0500
++++ msr_autogen/client.c	2022-04-15 14:11:17.140851710 -0500
+@@ -4,6 +4,8 @@
+ 
+ #include <lcd_config/post_hook.h>
+ 
++volatile unsigned long jiffies;
++
+ struct class* __class_create(struct module* owner, char const* name, struct lock_class_key* key)
+ {
+ 	struct fipc_message __buffer = {0};
+@@ -442,7 +444,7 @@
+ 	}
+ }
+ 
+-struct device* device_create(struct class* class, struct device* parent, unsigned int devt, void* drvdata, char const* fmt, unsigned int cpu)
++struct device* __device_create(struct class* class, struct device* parent, unsigned int devt, void* drvdata, char const* fmt, unsigned int cpu)
+ {
+ 	struct fipc_message __buffer = {0};
+ 	struct fipc_message *__msg = &__buffer;
+@@ -1396,11 +1398,16 @@
+ 	return ret;
+ }
+ 
++void __init_globals(void) {
++  jiffies = get_jiffies();
++}
++
+ int try_dispatch(enum RPC_ID id, struct fipc_message* __msg, struct ext_registers* __ext)
+ {
+ 	switch(id) {
+ 	case MODULE_INIT:
+ 		glue_user_trace("MODULE_INIT");
++    __init_globals();
+ 		__module_lcd_init();
+ 		shared_mem_init();
+ 		break;
+diff -Naur msr_autogen.orig/common.h msr_autogen/common.h
+--- msr_autogen.orig/common.h	2022-04-15 14:02:09.640850369 -0500
++++ msr_autogen/common.h	2022-04-15 14:11:53.390851799 -0500
+@@ -32,7 +32,7 @@
+ 
+ #ifndef LCD_ISOLATE
+ #define glue_unpack_rpc_ptr(pos, msg, ext, name) \
+-	glue_peek(pos, msg, ext) ? (fptr_##name)glue_unpack_rpc_ptr_impl(glue_unpack(pos, msg, ext, void*), LCD_DUP_TRAMPOLINE(trmp_##name), LCD_TRAMPOLINE_SIZE(trmp_##name)) : NULL
++	(fptr_##name)glue_unpack_rpc_ptr_impl(glue_unpack(pos, msg, ext, void*), LCD_DUP_TRAMPOLINE(trmp_##name), LCD_TRAMPOLINE_SIZE(trmp_##name))
+ 
+ #else
+ #define glue_unpack_rpc_ptr(pos, msg, ext, name) NULL; glue_user_panic("Trampolines cannot be used on LCD side")
+diff -Naur msr_autogen.orig/server.c msr_autogen/server.c
+--- msr_autogen.orig/server.c	2022-04-15 14:02:09.640850369 -0500
++++ msr_autogen/server.c	2022-04-15 14:11:38.520851763 -0500
+@@ -439,7 +439,7 @@
+ 	return impl(target, dev, mode);
+ }
+ 
+-void device_create_callee(struct fipc_message* __msg, struct ext_registers* __ext)
++void __device_create_callee(struct fipc_message* __msg, struct ext_registers* __ext)
+ {
+ 	size_t n_pos = 0;
+ 	size_t* __pos = &n_pos;
+@@ -1480,7 +1480,7 @@
+ 
+ 	case RPC_ID_device_create:
+ 		glue_user_trace("device_create\n");
+-		device_create_callee(__msg, __ext);
++		__device_create_callee(__msg, __ext);
+ 		break;
+ 
+ 	case RPC_ID_device_destroy:

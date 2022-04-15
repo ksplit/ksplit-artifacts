@@ -229,15 +229,28 @@ msr_autogen/boot nonisolated
 msr_autogen/msr_lcd isolated
 msr_autogen/msr_klcd nonisolated
 ```
+
 - Add Kbuild entry to `/opt/ksplit/lvd-linux/lcd-domains/scripts/Kbuild.test_mods`
 ```
 obj-m += msr_autogen/
 ```
 
 5) The isolated module needs a bunch of boilerplate code to bootstrap. All the
-necessary files are available in this repo under `msr_autogen` folder. After
-the above steps, you can copy all the files under `msr_autogen` to the
+necessary files are available in this repo under `msr/msr_autogen` folder. After
+the above steps, you can copy all the files under `msr/msr_autogen` to the
 directory created in step2.
+
+*NOTE* The boilerplate code assumes that the directory created is named
+`msr_autogen`. If you have created it with some other name, it needs to be
+reflected in the boilerplate code.
+
+- Before compiling the module, a few lines need to be patched in the auto-generated code.
+The patch is located at `msr/autogen_driver_changes.patch`.
+
+```
+cd /opt/ksplit/lvd-linux/lcd-domains/test_mods
+patch -p0 < msr/autogen_driver_changes.patch
+```
 
 6) Compile the newly auto-generated module
 ```
@@ -253,4 +266,11 @@ make test_mods
 cd /opt/ksplit/lvd-linux/lcd-domains/
 ./scripts/mk
 ./scripts/loadex msr_autogen
+```
+
+9) Test the msr driver
+```
+sudo apt install msr-tools
+# This should trigger an msr read through the isolated driver
+sudo rdmsr 0x1a4
 ```

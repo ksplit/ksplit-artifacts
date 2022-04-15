@@ -9,3 +9,6 @@
 [submodule "pdg"]
 	path = pdg
 	url = https://github.com/ARISTODE/program-dependence-graph
+[submodule "bc-files"]
+	path = bc-files
+	url = https://gitlab.flux.utah.edu/xcap/bc-files.git

@@ -8,13 +8,13 @@ paper titled **KSplit: Automating Device Driver Isolation**.
 All the experiments are evaluated on a Dell PowerEdge R820 machine on the
 [Emulab Infrastructure](https://www.emulab.net/apt/show-hardware.php?type=d820)
 
-
 ## Setting up the hardware
 
 * Create an account on [Cloudlab](https://www.cloudlab.us/) and login.
 
 ### Configuring the experiment
 
+#### Automated setup
 * The easiest way to setup our experiment is to use "Repository based profile".
 
 * Create an experiment profile by selecting
@@ -77,6 +77,16 @@ https://github.com/mars-research/ksplit-cloudlab
   pushd /opt/ksplit
   sudo chown -R <your-user-name>:<your-group> .
   ```
+
+#### Manual setup
+* If you want to set up the source repos manually for some reason,
+```
+mkdir /local
+# make sure you have permissions or use chown
+git clone https://github.com/mars-research/ksplit-cloudlab.git /local/respository
+# invoke the top level script
+/local/respository/ksplit-top.sh
+```
 
 ## Experiments
 

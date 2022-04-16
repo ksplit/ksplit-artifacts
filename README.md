@@ -1,5 +1,7 @@
 # Artifact Evaluation - OSDI'22
 
+Thank you for your time and picking our paper for the artifact evaluation.
+
 This documentation contains steps necessary to reproduce the artifacts for our
 paper titled **KSplit: Automating Device Driver Isolation**.
 

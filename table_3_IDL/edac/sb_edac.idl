@@ -1,0 +1,190 @@
+// Sync stubs for boundary functions
+module kernel {
+rpc int  edac_mc_add_mc_with_groups( projection mem_ctl_info [in] *mci, projection attribute_group  **groups ) {
+		projection < struct work> work {
+			projection timer timer;
+		}
+			projection < struct timer> timer {
+				u64 [out] data;
+			}
+	projection < struct mem_ctl_info > mem_ctl_info {
+		u64 [in] mtype_cap;
+		u64 [in] edac_ctl_cap;
+		u64 [in] edac_cap;
+		int [in] mc_idx;
+		array<projection csrow_info*, size_unknown> csrows;
+		unsigned int [in] nr_csrows;
+		unsigned int [in] tot_dimms;
+		array<projection dimm_info*, size_unknown> dimms;
+		projection mem_ctl_info_device* pdev;
+		char* [in] mod_name;
+		char* [in] ctl_name;
+		char* [in] dev_name;
+		void* [in] pvt_info;
+		u64 [out] start_time;
+		projection work work;
+		int [in,out] op_state;
+	}
+	projection < struct dimm_info > mem_ctl_info_dimm_info {
+	}
+	projection < struct device > mem_ctl_info_device {
+	}
+	projection < struct attribute_group > attribute_group {
+	}
+}
+rpc projection ret_mem_ctl_info*  edac_mc_alloc( unsigned int  mc_num, unsigned int  n_layers, projection edac_mc_layer [in,out] *layers, unsigned int  sz_pvt ) {
+	projection < struct mem_ctl_info > ret_mem_ctl_info {
+		int  mc_idx;
+		unsigned int [out] nr_csrows;
+		unsigned int [out] num_cschannel;
+		unsigned int [out] n_layers;
+		projection mem_ctl_info_edac_mc_layer* layers;
+		bool [out] csbased;
+		unsigned int [out] tot_dimms;
+		projection mem_ctl_info_dimm_info** dimms;
+		void* [out] pvt_info;
+		array< unsigned int, 6>  ce_per_layer;
+		array< unsigned int, 6>  ue_per_layer;
+		int [out] op_state;
+	}
+	projection < struct edac_mc_layer > ret_mem_ctl_info_edac_mc_layer {
+	}
+	projection < struct dimm_info > ret_mem_ctl_info_dimm_info {
+	}
+	projection < struct edac_mc_layer > edac_mc_layer {
+		unsigned int [in,out] type;
+		bool [in,out] is_virt_csrow;
+	}
+}
+rpc projection ret_mem_ctl_info*  edac_mc_del_mc( projection device  *dev ) {
+	projection < struct mem_ctl_info > ret_mem_ctl_info {
+		int  mc_idx;
+		char*  mod_name;
+		char*  ctl_name;
+		char*  dev_name;
+		int [out] op_state;
+	}
+	projection < struct device > device {
+	}
+}
+rpc void  edac_mc_free( projection mem_ctl_info [in] *mci ) {
+	projection < struct mem_ctl_info > mem_ctl_info {
+		unsigned int [in] nr_csrows;
+		unsigned int [in] num_cschannel;
+		unsigned int [in] tot_dimms;
+		projection mem_ctl_info_dimm_info** dimms;
+	}
+	projection < struct dimm_info > mem_ctl_info_dimm_info {
+	}
+}
+rpc void  edac_mc_handle_error( unsigned int  type, projection mem_ctl_info [in] *mci, unsigned short  error_count, u64  page_frame_number, u64  offset_in_page, u64  syndrome, int  top_layer, int  mid_layer, int  low_layer, string  [in,out] *msg, string  [in,out] *other_detail ) {
+		projection < struct error_desc> error_desc {
+			array< char, 256> [in] location;
+			array< char, 296> [in] label;
+			u64 [in,out] grain;
+			unsigned short [in,out] error_count;
+			int [in,out] top_layer;
+			int [in,out] mid_layer;
+			int [in,out] low_layer;
+			u64 [in,out] page_frame_number;
+			u64 [in,out] offset_in_page;
+			u64 [in,out] syndrome;
+			char* [in,out] msg;
+			char* [in,out] other_detail;
+			bool [in,out] enable_per_layer_report;
+		}
+	projection < struct mem_ctl_info > mem_ctl_info {
+		unsigned int [in] scrub_mode;
+		int [in] mc_idx;
+		array<projection csrow_info*, size_unknown> csrows;
+		unsigned int [in] n_layers;
+		projection mem_ctl_info_edac_mc_layer* layers;
+		bool [in] csbased;
+		unsigned int [in] tot_dimms;
+		array<projection dimm_info*, size_unknown> dimms;
+		unsigned int [in,out] ce_noinfo_count;
+		unsigned int [in,out] ue_noinfo_count;
+		unsigned int [in,out] ue_mc;
+		unsigned int [in,out] ce_mc;
+		array< unsigned int, 6> [in] ce_per_layer;
+		array< unsigned int, 6> [in] ue_per_layer;
+		projection error_desc error_desc;
+	}
+	projection < struct edac_mc_layer > mem_ctl_info_edac_mc_layer {
+	}
+	projection < struct dimm_info > mem_ctl_info_dimm_info {
+	}
+}
+rpc void*  kmalloc_order( u64  size, unsigned int  flags, unsigned int  order ) {
+}
+rpc void  mce_register_decode_chain(  ) {
+}
+rpc void  mce_unregister_decode_chain(  ) {
+}
+rpc int  pci_bus_read_config_dword( projection pci_bus [in] *bus, unsigned int  devfn, int  pos, unsigned int [out] *value ) {
+	projection < struct pci_bus > pci_bus {
+	}
+}
+rpc projection ret_pci_dev*  pci_dev_get( projection pci_dev [in] *dev ) {
+	projection < struct pci_dev > ret_pci_dev {
+	}
+	projection < struct pci_dev > pci_dev {
+	}
+}
+rpc void  pci_dev_put( projection pci_dev [in] *dev ) {
+	projection < struct pci_dev > pci_dev {
+	}
+}
+rpc int  pci_enable_device( projection pci_dev [in] *dev ) {
+	projection < struct pci_dev > pci_dev {
+		projection pci_dev_pci_bus* bus;
+		projection pci_dev_pci_bus* subordinate;
+		unsigned int [in] devfn;
+		int [in,out] current_state;
+		unsigned char [in] pm_cap;
+		unsigned int [in] pme_support : 5;
+		unsigned int [in] d3_delay;
+		unsigned int [in] d3cold_delay;
+		array< projection resource, 11> [in] resource;
+		unsigned int [in] msi_enabled : 1;
+		unsigned int [in] msix_enabled : 1;
+		unsigned int [in] is_virtfn : 1;
+		unsigned short [in] dev_flags;
+	}
+	projection < struct pci_bus > pci_dev_pci_bus {
+		projection pci_bus* parent;
+		projection pci_bus_pci_dev* self;
+	}
+	projection < struct pci_bus > pci_dev_pci_bus {
+	}
+	projection < struct pci_dev > pci_bus_pci_dev {
+	}
+}
+rpc projection ret_pci_dev*  pci_get_device( unsigned int  vendor, unsigned int  device, projection pci_dev [in] *from ) {
+	projection < struct pci_dev > ret_pci_dev {
+	}
+	projection < struct pci_dev > pci_dev {
+	}
+}
+rpc projection ret_x86_cpu_id*  x86_match_cpu( projection x86_cpu_id [in] *match ) {
+	projection < struct x86_cpu_id > ret_x86_cpu_id {
+		unsigned short  vendor;
+		unsigned short  family;
+		unsigned short  model;
+		unsigned short  feature;
+	}
+	projection < struct x86_cpu_id > x86_cpu_id {
+		unsigned short [in] vendor;
+		unsigned short [in] family;
+		unsigned short [in] model;
+		unsigned short [in] feature;
+	}
+}
+rpc_ptr int  sbridge_mce_check_error( projection _global_notifier_block [unused] nb, u64 [unused] val, void [in] *data ) {
+}
+projection < struct notifier_block > _global_notifier_block {
+	rpc_ptr sbridge_mce_check_error notifier_call;
+}
+
+
+}

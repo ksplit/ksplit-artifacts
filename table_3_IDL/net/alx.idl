@@ -1,0 +1,1144 @@
+// Sync stubs for boundary functions
+module kernel {
+rpc void  __const_udelay( u64  xloops ) {
+}
+rpc void  __dev_kfree_skb_any( projection sk_buff [in,out] *skb, unsigned int  reason ) {
+		projection < struct users> users {
+			int [in,out] counter;
+		}
+	projection < struct sk_buff > sk_buff {
+		projection sk_buff_net_device* dev;
+		array< char, 48> [in,out] cb;
+		u64 [in,out] _skb_refdst;
+		unsigned char [in] cloned : 1;
+		unsigned char [in] nohdr : 1;
+		unsigned char [in] fclone : 2;
+		unsigned char [in] head_frag : 1;
+		unsigned char [in] private : 1;
+		unsigned int [in] end;
+		unsigned char* [in] head;
+		projection users users;
+	}
+	projection < struct net_device > sk_buff_net_device {
+		array< char, 16> [in] name;
+		char* [in] ifalias;
+		u64 [in] mem_end;
+		u64 [in] mem_start;
+	}
+}
+rpc void  __dynamic_dev_dbg( projection _ddebug [in] *descriptor, projection device [in] *dev, char [in] *fmt ) {
+	projection < struct _ddebug > _ddebug {
+		char* [in] modname;
+		char* [in] function;
+		unsigned int [in] lineno : 18;
+		unsigned int [in] flags : 8;
+	}
+	projection < struct device > device {
+		char* [in] init_name;
+	}
+}
+rpc void  __local_bh_enable_ip( u64 [unused] ip, unsigned int  cnt ) {
+}
+rpc void  __napi_schedule( projection napi_struct  *n ) {
+	projection < struct napi_struct > napi_struct {
+	}
+}
+rpc projection ret_sk_buff*  __netdev_alloc_skb( projection net_device  *dev, unsigned int  len, unsigned int  gfp_mask ) {
+	projection < struct sk_buff > ret_sk_buff {
+		projection sk_buff_net_device* dev;
+		unsigned char  cloned : 1;
+		array<unsigned int, 0>  headers_start;
+		array<unsigned char, 0>  __pkt_type_offset;
+		unsigned char  pkt_type : 3;
+	}
+	projection < struct net_device > ret_sk_buff_net_device {
+	}
+	projection < struct net_device > net_device {
+	}
+}
+rpc int  __pci_register_driver( projection _global_pci_driver [in] drv, projection module  *owner, char  *mod_name ) {
+		projection < struct node> node {
+			projection list_head* next;
+		}
+		projection < struct driver> driver {
+			char* [out] name;
+			char* [out] mod_name;
+		}
+	projection < struct pci_device_id > pci_driver_pci_device_id {
+	}
+	projection < struct module > module {
+	}
+}
+rpc void  __raw_spin_lock_init( projection raw_spinlock [in] *lock, char [unused] *name, projection lock_class_key [unused] *key ) {
+	projection < struct raw_spinlock > raw_spinlock {
+		unsigned int [in,out] magic;
+		unsigned int [in,out] owner_cpu;
+		void* [in,out] owner;
+	}
+	projection < struct lock_class_key > lock_class_key {
+	}
+}
+rpc void  _dev_info( projection device [in] *dev, char  *fmt ) {
+	projection < struct device > device {
+		char* [in] init_name;
+	}
+}
+rpc void  _raw_spin_unlock( projection raw_spinlock [in,out] *lock ) {
+	projection < struct raw_spinlock > raw_spinlock {
+		unsigned int [in] magic;
+		unsigned int [in,out] owner_cpu;
+		void* [in,out] owner;
+	}
+}
+rpc projection ret_net_device*  alloc_etherdev_mqs( int  sizeof_priv, unsigned int  txqs, unsigned int  rxqs ) {
+	projection < struct net_device > ret_net_device {
+	}
+}
+rpc bool  cancel_work_sync( projection work_struct [in,out] *work ) {
+		projection < struct data> data {
+			u64 [in,out] counter;
+		}
+		projection < struct entry> entry {
+			projection list_head* next;
+			projection list_head* prev;
+		}
+	projection < struct work_struct > work_struct {
+		projection data data;
+		projection entry entry;
+	}
+}
+rpc void  consume_skb( projection sk_buff [in] *skb ) {
+		projection < struct users> users {
+			int [in,out] counter;
+		}
+	projection < struct sk_buff > sk_buff {
+		projection sk_buff_net_device* dev;
+		array< char, 48> [in] cb;
+		u64 [in,out] _skb_refdst;
+		unsigned char [in] cloned : 1;
+		unsigned char [in] nohdr : 1;
+		unsigned char [in] fclone : 2;
+		unsigned char [in] head_frag : 1;
+		unsigned char [in] private : 1;
+		unsigned int [in] end;
+		unsigned char* [in] head;
+		projection users users;
+	}
+	projection < struct net_device > sk_buff_net_device {
+		array< char, 16> [in] name;
+		char* [in] ifalias;
+		u64 [in] mem_end;
+		u64 [in] mem_start;
+	}
+}
+rpc unsigned int  crc32_le( unsigned int [in] crc, unsigned char [in] *p, u64  len ) {
+}
+rpc void  dev_err( projection device [in] *dev, char  *fmt ) {
+	projection < struct device > device {
+		char* [in] init_name;
+	}
+}
+rpc void  dev_warn( projection device [in] *dev, char  *fmt ) {
+	projection < struct device > device {
+		char* [in] init_name;
+	}
+}
+rpc void  free_irq( unsigned int  irq, void  *dev_id ) {
+}
+rpc void  free_netdev( projection net_device [in] *dev ) {
+		projection < struct napi_list> napi_list {
+			projection list_head* next;
+			projection list_head* prev;
+		}
+		projection < struct close_list> close_list {
+			projection list_head* next;
+			projection list_head* prev;
+		}
+		projection < struct dev> dev {
+			projection device* parent;
+			char* [in] init_name;
+			projection mutex mutex;
+			void* [in] platform_data;
+			void* [in] driver_data;
+			long long unsigned int* [in] dma_mask;
+			u64 [in] coherent_dma_mask;
+			u64 [in] dma_pfn_offset;
+			unsigned int [in] devt;
+			unsigned int [in] id;
+			bool [in] offline_disabled : 1;
+			bool [in] offline : 1;
+		}
+			projection < struct mutex> mutex {
+				projection count count;
+			}
+				projection < struct count> count {
+					int [in,out] counter;
+				}
+	projection < struct net_device > net_device {
+		projection napi_list napi_list;
+		projection close_list close_list;
+		unsigned short [in] padded;
+		projection net_device_netdev_queue* ingress_queue;
+		projection net_device_netdev_queue* _tx;
+		int* [in,out] pcpu_refcnt;
+		unsigned int [in,out] reg_state : 8;
+		projection dev dev;
+	}
+	projection < struct netdev_queue > net_device_netdev_queue {
+		u64 [in] trans_timeout;
+	}
+	projection < struct netdev_queue > net_device_netdev_queue {
+	}
+}
+rpc void*  kmalloc_order( u64  size, unsigned int  flags, unsigned int  order ) {
+}
+rpc int  mdio_mii_ioctl( projection mdio_if_info [in] *mdio, projection mii_ioctl_data [in,out] *mii_data, int  cmd ) {
+	projection < struct mdio_if_info > mdio_if_info {
+		int [in] prtad;
+		unsigned int [in] mmds;
+		unsigned int [in] mode_support;
+		projection mdio_if_info_net_device* dev;
+	}
+	projection < struct net_device > mdio_if_info_net_device {
+	}
+	projection < struct mii_ioctl_data > mii_ioctl_data {
+		unsigned short [in,out] phy_id;
+		unsigned short [in] reg_num;
+		unsigned short [in] val_in;
+		unsigned short [out] val_out;
+	}
+}
+rpc void  napi_complete_done( projection napi_struct [in,out] *n, int  work_done ) {
+		projection < struct poll_list> poll_list {
+			projection list_head* next;
+			projection list_head* prev;
+		}
+	projection < struct napi_struct > napi_struct {
+		projection poll_list poll_list;
+		u64 [in,out] state;
+		int [in,out] weight;
+		unsigned int [in,out] gro_count;
+		projection napi_struct_net_device* dev;
+		projection napi_struct_sk_buff* gro_list;
+	}
+	projection < struct net_device > napi_struct_net_device {
+		array< char, 16> [in,out] name;
+		u64 [in,out] mem_end;
+		u64 [in,out] mem_start;
+		u64 [in] gro_flush_timeout;
+	}
+		projection < struct users> users {
+			int [in,out] counter;
+		}
+	projection < struct sk_buff > napi_struct_sk_buff {
+		projection sk_buff_net_device* dev;
+		array< char, 48> [in,out] cb;
+		u64 [in,out] _skb_refdst;
+		unsigned int [in,out] len;
+		unsigned int [in,out] data_len;
+		unsigned short [in,out] mac_len;
+		unsigned short [in,out] hdr_len;
+		unsigned short [in,out] queue_mapping;
+		unsigned char [in,out] cloned : 1;
+		unsigned char [in,out] nohdr : 1;
+		unsigned char [in,out] fclone : 2;
+		unsigned char [in,out] head_frag : 1;
+		unsigned char [in,out] private : 1;
+		array<unsigned int, 0> [in,out] headers_start;
+		array<unsigned char, 0> [in,out] __pkt_type_offset;
+		unsigned char [in,out] pkt_type : 3;
+		unsigned char [in] pfmemalloc : 1;
+		unsigned char [in] nf_trace : 1;
+		unsigned char [in,out] ip_summed : 2;
+		unsigned char [in] l4_hash : 1;
+		unsigned char [in] sw_hash : 1;
+		int [in,out] skb_iif;
+		unsigned int [in] hash;
+		unsigned short [out] vlan_proto;
+		unsigned short [in,out] vlan_tci;
+		unsigned short [in,out] inner_transport_header;
+		unsigned short [in,out] inner_network_header;
+		unsigned short [in,out] inner_mac_header;
+		unsigned short [in,out] protocol;
+		unsigned short [in,out] transport_header;
+		unsigned short [in,out] network_header;
+		unsigned short [in,out] mac_header;
+		array<unsigned int, 0> [in,out] headers_end;
+		unsigned int [in,out] tail;
+		unsigned int [in,out] end;
+		unsigned char* [in,out] head;
+		unsigned char* [in,out] data;
+		unsigned int [in,out] truesize;
+		projection users users;
+	}
+	projection < struct net_device > sk_buff_net_device {
+		array< char, 16> [in,out] name;
+		char* [in,out] ifalias;
+		u64 [in,out] mem_end;
+		u64 [in] mem_start;
+		u64 [in] state;
+		u64 [in,out] features;
+		u64 [in,out] hw_enc_features;
+		int [in,out] ifindex;
+		projection _global_net_device_ops* netdev_ops;
+		unsigned int [in,out] real_num_rx_queues;
+	}
+}
+rpc void  napi_disable( projection napi_struct [in] *n ) {
+	projection < struct napi_struct > napi_struct {
+		u64 [in] state;
+	}
+}
+rpc unsigned int  napi_gro_receive( projection napi_struct [in] *napi, projection sk_buff [in,out] *skb ) {
+	projection < struct napi_struct > napi_struct {
+		unsigned int [in,out] gro_count;
+		projection napi_struct_sk_buff* gro_list;
+	}
+		projection < struct users> users {
+			int [in,out] counter;
+		}
+	projection < struct sk_buff > napi_struct_sk_buff {
+		projection sk_buff_net_device* dev;
+		array< char, 48> [in,out] cb;
+		u64 [in,out] _skb_refdst;
+		unsigned int [in,out] len;
+		unsigned int [in,out] data_len;
+		unsigned short [in,out] mac_len;
+		unsigned short [in,out] hdr_len;
+		unsigned short [in,out] queue_mapping;
+		unsigned char [in,out] cloned : 1;
+		unsigned char [in,out] nohdr : 1;
+		unsigned char [in,out] fclone : 2;
+		unsigned char [in,out] head_frag : 1;
+		unsigned char [in,out] private : 1;
+		array<unsigned int, 0> [in,out] headers_start;
+		array<unsigned char, 0> [in,out] __pkt_type_offset;
+		unsigned char [in,out] pkt_type : 3;
+		unsigned char [in] pfmemalloc : 1;
+		unsigned char [in] nf_trace : 1;
+		unsigned char [in,out] ip_summed : 2;
+		unsigned char [in] l4_hash : 1;
+		unsigned char [in] sw_hash : 1;
+		int [in,out] skb_iif;
+		unsigned int [in] hash;
+		unsigned short [out] vlan_proto;
+		unsigned short [in,out] vlan_tci;
+		unsigned short [in,out] inner_transport_header;
+		unsigned short [in,out] inner_network_header;
+		unsigned short [in,out] inner_mac_header;
+		unsigned short [in,out] protocol;
+		unsigned short [in,out] transport_header;
+		unsigned short [in,out] network_header;
+		unsigned short [in,out] mac_header;
+		array<unsigned int, 0> [in,out] headers_end;
+		unsigned int [in,out] tail;
+		unsigned int [in,out] end;
+		unsigned char* [in,out] head;
+		unsigned char* [in,out] data;
+		unsigned int [in,out] truesize;
+		projection users users;
+	}
+	projection < struct net_device > sk_buff_net_device {
+		array< char, 16> [in,out] name;
+		char* [in,out] ifalias;
+		u64 [in,out] mem_end;
+		u64 [in] mem_start;
+		u64 [in] state;
+		u64 [in,out] features;
+		u64 [in,out] hw_enc_features;
+		int [in,out] ifindex;
+		projection _global_net_device_ops* netdev_ops;
+		unsigned int [in,out] real_num_rx_queues;
+	}
+		projection < struct users> users {
+			int [in,out] counter;
+		}
+	projection < struct sk_buff > sk_buff {
+		projection sk_buff_net_device* dev;
+		array< char, 48> [in,out] cb;
+		u64 [in,out] _skb_refdst;
+		unsigned int [in,out] len;
+		unsigned int [in,out] data_len;
+		unsigned short [in,out] mac_len;
+		unsigned short [in,out] hdr_len;
+		unsigned short [in,out] queue_mapping;
+		unsigned char [in,out] cloned : 1;
+		unsigned char [in,out] nohdr : 1;
+		unsigned char [in,out] fclone : 2;
+		unsigned char [in,out] head_frag : 1;
+		unsigned char [in,out] private : 1;
+		array<unsigned int, 0> [in,out] headers_start;
+		array<unsigned char, 0> [in,out] __pkt_type_offset;
+		unsigned char [in,out] pkt_type : 3;
+		unsigned char [in] pfmemalloc : 1;
+		unsigned char [in] nf_trace : 1;
+		unsigned char [in,out] ip_summed : 2;
+		unsigned char [in] l4_hash : 1;
+		unsigned char [in] sw_hash : 1;
+		int [in,out] skb_iif;
+		unsigned int [in] hash;
+		unsigned short [out] vlan_proto;
+		unsigned short [in,out] vlan_tci;
+		unsigned short [in,out] inner_transport_header;
+		unsigned short [in,out] inner_network_header;
+		unsigned short [in,out] inner_mac_header;
+		unsigned short [in,out] protocol;
+		unsigned short [in,out] transport_header;
+		unsigned short [in,out] network_header;
+		unsigned short [in,out] mac_header;
+		array<unsigned int, 0> [in,out] headers_end;
+		unsigned int [in,out] tail;
+		unsigned int [in,out] end;
+		unsigned char* [in,out] head;
+		unsigned char* [in,out] data;
+		unsigned int [in,out] truesize;
+		projection users users;
+	}
+		projection < struct napi_list> napi_list {
+			projection list_head* next;
+			projection list_head* prev;
+		}
+		projection < struct unreg_list> unreg_list {
+			projection list_head* next;
+			projection list_head* prev;
+		}
+		projection < struct ptype_all> ptype_all {
+			projection list_head* next;
+		}
+		projection < struct ptype_specific> ptype_specific {
+			projection list_head* next;
+		}
+		projection < struct rx_dropped> rx_dropped {
+			u64 [in,out] counter;
+		}
+		projection < struct rx_nohandler> rx_nohandler {
+			u64 [in,out] counter;
+		}
+	projection < struct net_device > sk_buff_net_device {
+		array< char, 16> [in,out] name;
+		char* [in,out] ifalias;
+		u64 [in,out] mem_end;
+		u64 [in] mem_start;
+		u64 [in] state;
+		projection napi_list napi_list;
+		projection unreg_list unreg_list;
+		projection ptype_all ptype_all;
+		projection ptype_specific ptype_specific;
+		u64 [in,out] features;
+		u64 [in,out] hw_enc_features;
+		int [in,out] ifindex;
+		projection rx_dropped rx_dropped;
+		projection rx_nohandler rx_nohandler;
+		projection _global_net_device_ops* netdev_ops;
+		unsigned int [in,out] real_num_rx_queues;
+	}
+}
+rpc void  netdev_info( projection net_device [in] *dev, char  *fmt ) {
+		projection < struct dev> dev {
+			projection device* parent;
+		}
+	projection < struct net_device > net_device {
+		array< char, 16> [in] name;
+		unsigned int [in] reg_state : 8;
+		projection dev dev;
+	}
+}
+rpc void  netdev_update_features( projection net_device [in] *dev ) {
+		projection < struct adj_list> adj_list {
+			projection upper upper;
+			projection lower lower;
+		}
+			projection < struct upper> upper {
+				projection list_head* next;
+				projection list_head* prev;
+			}
+			projection < struct lower> lower {
+				projection list_head* next;
+			}
+		projection < struct stats> stats {
+			u64 [in] rx_bytes;
+			u64 [in] tx_compressed;
+		}
+	projection < struct net_device > net_device {
+		array< char, 16> [in] name;
+		projection adj_list adj_list;
+		u64 [in,out] features;
+		u64 [in] hw_features;
+		u64 [in] wanted_features;
+		u64 [in] gso_partial_features;
+		int [in] ifindex;
+		projection stats stats;
+		projection _global_net_device_ops* netdev_ops;
+	}
+}
+rpc void  netdev_warn( projection net_device [in] *dev, char  *fmt ) {
+		projection < struct dev> dev {
+			projection device* parent;
+		}
+	projection < struct net_device > net_device {
+		array< char, 16> [in] name;
+		unsigned int [in] reg_state : 8;
+		projection dev dev;
+	}
+}
+rpc void  netif_carrier_off( projection net_device [in] *dev ) {
+	projection < struct net_device > net_device {
+		unsigned int [in] reg_state : 8;
+	}
+}
+rpc void  netif_carrier_on( projection net_device [in] *dev ) {
+	projection < struct net_device > net_device {
+		u64 [in] state;
+		projection _global_net_device_ops* netdev_ops;
+		int [in,out] watchdog_timeo;
+		int* [in] pcpu_refcnt;
+		unsigned int [in] reg_state : 8;
+	}
+}
+rpc void  netif_device_attach( projection net_device [in] *dev ) {
+	projection < struct net_device > net_device {
+		u64 [in] state;
+		projection _global_net_device_ops* netdev_ops;
+		projection _netdev_queue* _tx;
+		unsigned int [in] num_tx_queues;
+		int [in,out] watchdog_timeo;
+		int* [in] pcpu_refcnt;
+	}
+	projection < struct netdev_queue > net_device_netdev_queue {
+	}
+}
+rpc void  netif_device_detach( projection net_device [in] *dev ) {
+	projection < struct net_device > net_device {
+		u64 [in] state;
+		projection net_device_netdev_queue* _tx;
+		unsigned int [in] num_tx_queues;
+	}
+	projection < struct netdev_queue > net_device_netdev_queue {
+	}
+}
+rpc void  netif_napi_add( projection net_device [in] *dev, projection napi_struct [in,out] *napi, rpc_ptr poll  poll, int  weight ) {
+	projection < struct net_device > net_device {
+		array< char, 16> [in] name;
+	}
+	projection < struct napi_struct > napi_struct {
+		u64 [in] state;
+		int [out] weight;
+		unsigned int [out] gro_count;
+		projection napi_struct_net_device* dev;
+		projection napi_struct_sk_buff* gro_list;
+		projection napi_struct_sk_buff* skb;
+		unsigned int [in,out] napi_id;
+	}
+	projection < struct net_device > napi_struct_net_device {
+	}
+	projection < struct sk_buff > napi_struct_sk_buff {
+	}
+	projection < struct sk_buff > napi_struct_sk_buff {
+	}
+}
+rpc void  netif_napi_del( projection napi_struct [in] *napi ) {
+	projection < struct napi_struct > napi_struct {
+		unsigned int [out] gro_count;
+		projection napi_struct_sk_buff* gro_list;
+		projection napi_struct_sk_buff* skb;
+	}
+		projection < struct users> users {
+			int [in,out] counter;
+		}
+	projection < struct sk_buff > napi_struct_sk_buff {
+		projection sk_buff_net_device* dev;
+		array< char, 48> [in] cb;
+		u64 [in,out] _skb_refdst;
+		unsigned char [in] cloned : 1;
+		unsigned char [in] nohdr : 1;
+		unsigned char [in] fclone : 2;
+		unsigned char [in] head_frag : 1;
+		unsigned char [in] private : 1;
+		unsigned int [in] end;
+		unsigned char* [in] head;
+		projection users users;
+	}
+		projection < struct users> users {
+			int [in,out] counter;
+		}
+	projection < struct sk_buff > napi_struct_sk_buff {
+		projection sk_buff_net_device* dev;
+		array< char, 48> [in] cb;
+		u64 [in,out] _skb_refdst;
+		unsigned char [in] cloned : 1;
+		unsigned char [in] nohdr : 1;
+		unsigned char [in] fclone : 2;
+		unsigned char [in] head_frag : 1;
+		unsigned char [in] private : 1;
+		unsigned int [in] end;
+		unsigned char* [in] head;
+		projection users users;
+	}
+	projection < struct net_device > sk_buff_net_device {
+		array< char, 16> [in] name;
+		char* [in] ifalias;
+		u64 [in] mem_end;
+		u64 [in] mem_start;
+	}
+	projection < struct net_device > sk_buff_net_device {
+		array< char, 16> [in] name;
+		char* [in] ifalias;
+		u64 [in] mem_end;
+		u64 [in] mem_start;
+	}
+}
+rpc void  netif_schedule_queue( projection netdev_queue [in] *txq ) {
+	projection < struct netdev_queue > netdev_queue {
+		u64 [in] state;
+	}
+}
+rpc void  netif_tx_wake_queue( projection netdev_queue [in] *dev_queue ) {
+	projection < struct netdev_queue > netdev_queue {
+		u64 [in] state;
+	}
+}
+rpc int  pci_bus_read_config_word( projection pci_bus [in] *bus, unsigned int  devfn, int  pos, unsigned short [out] *value ) {
+	projection < struct pci_bus > pci_bus {
+	}
+}
+rpc int  pci_bus_write_config_word( projection pci_bus [in] *bus, unsigned int  devfn, int  pos, unsigned short  value ) {
+	projection < struct pci_bus > pci_bus {
+	}
+}
+rpc int  pci_cleanup_aer_uncorrect_error_status( projection pci_dev [in] *dev ) {
+	projection < struct pci_dev > pci_dev {
+		projection pci_dev_pci_bus* bus;
+		unsigned int [in] devfn;
+		int [in] cfg_size;
+	}
+	projection < struct pci_bus > pci_dev_pci_bus {
+	}
+}
+rpc void  pci_disable_device( projection pci_dev [in] *dev ) {
+	projection < struct pci_dev > pci_dev {
+		projection pci_dev_pci_bus* bus;
+		unsigned int [in] devfn;
+		unsigned int [in,out] transparent : 1;
+		unsigned int [in] is_managed : 1;
+	}
+	projection < struct pci_bus > pci_dev_pci_bus {
+	}
+}
+rpc void  pci_disable_msi( projection pci_dev [in] *dev ) {
+		projection < struct dev> dev {
+			projection device* parent;
+			projection msi_list msi_list;
+		}
+			projection < struct msi_list> msi_list {
+				projection list_head* next;
+			}
+	projection < struct pci_dev > pci_dev {
+		projection pci_dev_pci_bus* bus;
+		unsigned int [in] devfn;
+		unsigned char [in] msi_cap;
+		projection dev dev;
+		unsigned int [out] irq;
+		unsigned int [in,out] transparent : 1;
+		unsigned int [in] msi_enabled : 1;
+		unsigned int [in] is_managed : 1;
+		unsigned short [in] dev_flags;
+	}
+	projection < struct pci_bus > pci_dev_pci_bus {
+	}
+}
+rpc int  pci_disable_pcie_error_reporting( projection pci_dev [in] *dev ) {
+	projection < struct pci_dev > pci_dev {
+		projection pci_dev_pci_bus* bus;
+		unsigned int [in] devfn;
+		unsigned char [in] pcie_cap;
+		unsigned short [in] pcie_flags_reg;
+		unsigned int [in] __aer_firmware_first_valid : 1;
+		unsigned int [in] __aer_firmware_first : 1;
+	}
+	projection < struct pci_bus > pci_dev_pci_bus {
+	}
+}
+rpc int  pci_enable_device( projection pci_dev [in] *dev ) {
+	projection < struct pci_dev > pci_dev {
+		projection pci_dev_pci_bus* bus;
+		projection pci_dev_pci_bus* subordinate;
+		unsigned int [in] devfn;
+		int [in,out] current_state;
+		unsigned char [in] pm_cap;
+		unsigned int [in] pme_support : 5;
+		unsigned int [in] d3cold_delay;
+		array< projection resource, 11> [in] resource;
+		unsigned int [in] msi_enabled : 1;
+		unsigned int [in] msix_enabled : 1;
+		unsigned short [in] dev_flags;
+	}
+	projection < struct pci_bus > pci_dev_pci_bus {
+		projection pci_bus* parent;
+		projection pci_bus_pci_dev* self;
+	}
+	projection < struct pci_bus > pci_dev_pci_bus {
+	}
+	projection < struct pci_dev > pci_bus_pci_dev {
+	}
+}
+rpc int  pci_enable_device_mem( projection pci_dev [in] *dev ) {
+	projection < struct pci_dev > pci_dev {
+		projection pci_dev_pci_bus* bus;
+		projection pci_dev_pci_bus* subordinate;
+		unsigned int [in] devfn;
+		int [in,out] current_state;
+		unsigned char [in] pm_cap;
+		unsigned int [in] pme_support : 5;
+		unsigned int [in] d3cold_delay;
+		array< projection resource, 11> [in] resource;
+		unsigned int [in] msi_enabled : 1;
+		unsigned int [in] msix_enabled : 1;
+		unsigned short [in] dev_flags;
+	}
+	projection < struct pci_bus > pci_dev_pci_bus {
+		projection pci_bus* parent;
+		projection pci_bus_pci_dev* self;
+	}
+	projection < struct pci_bus > pci_dev_pci_bus {
+	}
+	projection < struct pci_dev > pci_bus_pci_dev {
+	}
+}
+rpc int  pci_enable_msi_range( projection pci_dev [in] *dev, int  minvec, int  maxvec ) {
+	projection < struct pci_dev > pci_dev {
+		projection pci_dev_pci_bus* bus;
+		int [in] current_state;
+		unsigned int [in] no_msi : 1;
+		unsigned int [in] msi_enabled : 1;
+		unsigned int [in] msix_enabled : 1;
+	}
+	projection < struct pci_bus > pci_dev_pci_bus {
+		projection pci_bus* parent;
+		unsigned short [in] bus_flags;
+	}
+}
+rpc int  pci_enable_pcie_error_reporting( projection pci_dev [in] *dev ) {
+	projection < struct pci_dev > pci_dev {
+		projection pci_dev_pci_bus* bus;
+		unsigned int [in] devfn;
+		unsigned char [in] pcie_cap;
+		unsigned short [in] pcie_flags_reg;
+		int [in] cfg_size;
+		unsigned int [in] __aer_firmware_first_valid : 1;
+		unsigned int [in] __aer_firmware_first : 1;
+	}
+	projection < struct pci_bus > pci_dev_pci_bus {
+	}
+}
+rpc void*  pci_ioremap_bar( projection pci_dev [in] *pdev, int  bar ) {
+	projection < struct pci_dev > pci_dev {
+		array< projection resource, 11> [in] resource;
+	}
+}
+rpc void  pci_release_selected_regions( projection pci_dev [in] *pdev, int  bars ) {
+	projection < struct pci_dev > pci_dev {
+		array< projection resource, 11> [in] resource;
+		unsigned int [in] is_managed : 1;
+	}
+}
+rpc int  pci_request_selected_regions( projection pci_dev [in] *pdev, int  bars, char  *res_name ) {
+	projection < struct pci_dev > pci_dev {
+		array< projection resource, 11> [in] resource;
+		unsigned int [in] is_managed : 1;
+	}
+}
+rpc int  pci_select_bars( projection pci_dev [in] *dev, u64  flags ) {
+	projection < struct pci_dev > pci_dev {
+		array< projection resource, 11> [in] resource;
+	}
+}
+rpc void  pci_set_master( projection pci_dev [in] *dev ) {
+	projection < struct pci_dev > pci_dev {
+		projection pci_dev_pci_bus* bus;
+		unsigned int [in] devfn;
+		unsigned char [in] pcie_cap;
+		unsigned int [in,out] transparent : 1;
+	}
+	projection < struct pci_bus > pci_dev_pci_bus {
+	}
+}
+rpc void  pci_unregister_driver( projection _global_pci_driver [in,out] drv ) {
+		projection < struct node> node {
+			projection list_head* next;
+			projection list_head* prev;
+		}
+		projection < struct dynids> dynids {
+			projection list list;
+		}
+			projection < struct list> list {
+				projection list_head* next;
+				projection list_head* prev;
+			}
+	projection < struct pci_device_id > pci_driver_pci_device_id {
+	}
+}
+rpc int  pcie_get_readrq( projection pci_dev [in] *dev ) {
+	projection < struct pci_dev > pci_dev {
+		projection pci_dev_pci_bus* bus;
+		unsigned int [in] devfn;
+		unsigned char [in] pcie_cap;
+		unsigned short [in] pcie_flags_reg;
+	}
+	projection < struct pci_bus > pci_dev_pci_bus {
+	}
+}
+rpc int  pcie_set_readrq( projection pci_dev [in] *dev, int  rq ) {
+	projection < struct pci_dev > pci_dev {
+		projection pci_dev_pci_bus* bus;
+		unsigned int [in] devfn;
+		unsigned char [in] pcie_cap;
+		unsigned short [in] pcie_flags_reg;
+	}
+	projection < struct pci_bus > pci_dev_pci_bus {
+	}
+}
+rpc bool  queue_work_on( int  cpu, projection workqueue_struct [in,out] *wq, projection work_struct [in] *work ) {
+	projection < struct workqueue_struct > workqueue_struct {
+		array< char, 24> [in] name;
+		unsigned int [in] flags;
+		array<projection pool_workqueue, 0> [in,out] numa_pwq_tbl;
+	}
+	projection < struct work_struct > work_struct {
+	}
+}
+rpc int  register_netdev( projection net_device [in,out] *dev ) {
+		projection < struct unreg_list> unreg_list {
+			projection list_head* next;
+			projection list_head* prev;
+		}
+		projection < struct ptype_all> ptype_all {
+			projection list_head* next;
+			projection list_head* prev;
+		}
+		projection < struct ptype_specific> ptype_specific {
+			projection list_head* next;
+			projection list_head* prev;
+		}
+		projection < struct adj_list> adj_list {
+			projection upper upper;
+			projection lower lower;
+		}
+			projection < struct upper> upper {
+				projection list_head* next;
+				projection list_head* prev;
+			}
+			projection < struct lower> lower {
+				projection list_head* next;
+			}
+		projection < struct stats> stats {
+			u64 [in] tx_compressed;
+		}
+		projection < struct watchdog_timer> watchdog_timer {
+			u64 [out] data;
+		}
+		projection < struct dev> dev {
+			projection device* parent;
+			char* [in] init_name;
+			void* [in] platform_data;
+			void* [in] driver_data;
+			long long unsigned int* [in] dma_mask;
+			u64 [in] coherent_dma_mask;
+			u64 [in] dma_pfn_offset;
+			unsigned int [in] devt;
+			unsigned int [in] id;
+			bool [in] offline_disabled : 1;
+			bool [in] offline : 1;
+		}
+	projection < struct net_device > net_device {
+		array< char, 16> [in,out] name;
+		u64 [in,out] state;
+		projection unreg_list unreg_list;
+		projection ptype_all ptype_all;
+		projection ptype_specific ptype_specific;
+		projection adj_list adj_list;
+		u64 [in,out] features;
+		u64 [in,out] hw_features;
+		u64 [in,out] wanted_features;
+		u64 [in,out] vlan_features;
+		u64 [in,out] hw_enc_features;
+		u64 [in,out] mpls_features;
+		u64 [in] gso_partial_features;
+		int [in,out] ifindex;
+		projection stats stats;
+		projection _global_net_device_ops* netdev_ops;
+		unsigned int [in,out] flags;
+		array< unsigned char, 32> [in,out] perm_addr;
+		unsigned char [in,out] addr_assign_type;
+		unsigned char [in,out] addr_len;
+		unsigned char* [in,out] dev_addr;
+		projection _netdev_queue* ingress_queue;
+		projection watchdog_timer watchdog_timer;
+		int* [in] pcpu_refcnt;
+		unsigned int [in,out] reg_state : 8;
+		unsigned int [in,out] rtnl_link_state : 16;
+		projection dev dev;
+	}
+	projection < struct netdev_queue > net_device_netdev_queue {
+	}
+}
+rpc int  request_threaded_irq( unsigned int  irq, rpc_ptr irq_nested_primary_handler  handler, rpc_ptr irq_default_primary_handler  thread_fn, u64  irqflags, char  *devname, void  *dev_id ) {
+}
+rpc int  rtnl_is_locked(  ) {
+}
+rpc void  rtnl_lock(  ) {
+}
+rpc void  rtnl_unlock(  ) {
+}
+rpc unsigned char*  skb_put( projection sk_buff [in] *skb, unsigned int  len ) {
+	projection < struct sk_buff > sk_buff {
+		projection sk_buff_net_device* dev;
+		unsigned int [in,out] len;
+		unsigned int [in] data_len;
+		array<unsigned int, 0> [in,out] headers_end;
+		unsigned int [in,out] tail;
+		unsigned int [in] end;
+		array<unsigned char, size_unknown> head;
+		unsigned char* [in] data;
+	}
+	projection < struct net_device > sk_buff_net_device {
+		array< char, 16> [in] name;
+	}
+}
+rpc void  synchronize_irq( unsigned int  irq ) {
+}
+rpc void  unregister_netdev( projection net_device [in] *dev ) {
+		projection < struct unreg_list> unreg_list {
+			projection list_head* next;
+			projection list_head* prev;
+		}
+	projection < struct net_device > net_device {
+		projection unreg_list unreg_list;
+	}
+}
+rpc int  eth_validate_addr( projection net_device [in] *dev ) {
+	projection < struct net_device > net_device {
+		unsigned char* [in] dev_addr;
+	}
+}
+rpc unsigned int  ethtool_op_get_link( projection net_device [in] *dev ) {
+	projection < struct net_device > net_device {
+		u64 [in] state;
+	}
+}
+rpc_ptr int  alx_get_settings( projection net_device  *netdev, projection ethtool_cmd [in] *ecmd ) {
+	projection < struct net_device > net_device {
+	}
+	projection < struct ethtool_cmd > ethtool_cmd {
+		unsigned int [in,out] supported;
+		unsigned int [in,out] advertising;
+		unsigned short [out] speed;
+		unsigned char [out] duplex;
+		unsigned char [out] port;
+		unsigned char [out] phy_address;
+		unsigned char [out] transceiver;
+		unsigned char [out] autoneg;
+		unsigned short [out] speed_hi;
+	}
+}
+rpc_ptr int  alx_set_settings( projection net_device  *netdev, projection ethtool_cmd [in] *ecmd ) {
+	projection < struct net_device > net_device {
+	}
+	projection < struct ethtool_cmd > ethtool_cmd {
+		unsigned int [in] advertising;
+		unsigned short [in] speed;
+		unsigned char [in] duplex;
+		unsigned char [in] autoneg;
+		unsigned short [in] speed_hi;
+	}
+}
+rpc_ptr unsigned int  alx_get_msglevel( projection net_device  *netdev ) {
+	projection < struct net_device > net_device {
+	}
+}
+rpc_ptr void  alx_set_msglevel( projection net_device  *netdev, unsigned int  data ) {
+	projection < struct net_device > net_device {
+	}
+}
+rpc_ptr void  alx_get_pauseparam( projection net_device  *netdev, projection ethtool_pauseparam [in] *pause ) {
+	projection < struct net_device > net_device {
+	}
+	projection < struct ethtool_pauseparam > ethtool_pauseparam {
+		unsigned int [out] autoneg;
+		unsigned int [out] rx_pause;
+		unsigned int [out] tx_pause;
+	}
+}
+rpc_ptr int  alx_set_pauseparam( projection net_device  *netdev, projection ethtool_pauseparam [in] *pause ) {
+	projection < struct net_device > net_device {
+	}
+	projection < struct ethtool_pauseparam > ethtool_pauseparam {
+		unsigned int [in] autoneg;
+		unsigned int [in] rx_pause;
+		unsigned int [in] tx_pause;
+	}
+}
+rpc_ptr void  alx_get_strings( projection net_device [unused] *netdev, unsigned int  stringset, unsigned char [in] *buf ) {
+	projection < struct net_device > net_device {
+	}
+}
+rpc_ptr void  alx_get_ethtool_stats( projection net_device  *netdev, projection ethtool_stats [unused] *estats, long long unsigned int [out] *data ) {
+	projection < struct net_device > net_device {
+	}
+	projection < struct ethtool_stats > ethtool_stats {
+	}
+}
+rpc_ptr int  alx_get_sset_count( projection net_device [unused] *netdev, int  sset ) {
+	projection < struct net_device > net_device {
+	}
+}
+rpc_ptr int  alx_probe( projection pci_dev [in] *pdev, projection pci_device_id [in] *ent ) {
+	projection < struct pci_dev > pci_dev {
+		unsigned char [in] pm_cap;
+		unsigned int [in] irq;
+		unsigned short [in,out] dev_flags;
+	}
+	projection < struct pci_device_id > pci_device_id {
+		u64 [in] driver_data;
+	}
+}
+rpc_ptr void  alx_remove( projection pci_dev [in] *pdev ) {
+	projection < struct pci_dev > pci_dev {
+	}
+}
+rpc_ptr unsigned int  alx_pci_error_detected( projection pci_dev [in] *pdev, unsigned int  state ) {
+	projection < struct pci_dev > pci_dev {
+	}
+}
+rpc_ptr unsigned int  alx_pci_error_slot_reset( projection pci_dev [in] *pdev ) {
+	projection < struct pci_dev > pci_dev {
+	}
+}
+rpc_ptr void  alx_pci_error_resume( projection pci_dev [in] *pdev ) {
+	projection < struct pci_dev > pci_dev {
+	}
+}
+rpc_ptr int  alx_open( projection net_device [in] *netdev ) {
+	projection < struct net_device > net_device {
+	}
+}
+rpc_ptr int  alx_stop( projection net_device [in] *netdev ) {
+	projection < struct net_device > net_device {
+	}
+}
+rpc_ptr int  alx_start_xmit( projection sk_buff [in] *skb, projection net_device [in] *netdev ) {
+	projection < struct sk_buff > sk_buff {
+		unsigned int [in] len;
+		unsigned char [in] ip_summed : 2;
+		unsigned int [in] end;
+		unsigned char* [in] head;
+		unsigned char* [in] data;
+	}
+	projection < struct net_device > net_device {
+	}
+}
+rpc_ptr void  alx_set_rx_mode( projection net_device [in] *netdev ) {
+		projection < struct mc> mc {
+			projection list list;
+		}
+			projection < struct list> list {
+				projection list_head* next;
+			}
+	projection < struct net_device > net_device {
+		unsigned int [in] flags;
+		projection mc mc;
+	}
+}
+rpc_ptr int  alx_set_mac_address( projection net_device [in] *netdev, void [in] *data ) {
+	projection < struct net_device > net_device {
+		unsigned char [in,out] addr_assign_type;
+		unsigned char [in] addr_len;
+		unsigned char* [in] dev_addr;
+	}
+}
+rpc_ptr int  alx_ioctl( projection net_device [in] *netdev, projection ifreq [in] *ifr, int  cmd ) {
+	projection < struct net_device > net_device {
+		u64 [in] state;
+	}
+	projection < struct ifreq > ifreq {
+	}
+}
+rpc_ptr int  alx_change_mtu( projection net_device [in] *netdev, int  mtu ) {
+	projection < struct net_device > net_device {
+		u64 [in] state;
+		unsigned int [in,out] mtu;
+	}
+}
+rpc_ptr void  alx_tx_timeout( projection net_device [in] *dev ) {
+	projection < struct net_device > net_device {
+	}
+}
+rpc_ptr projection ret_rtnl_link_stats64*  alx_get_stats64( projection net_device [in] *dev, projection rtnl_link_stats64 [in,out] *net_stats ) {
+	projection < struct rtnl_link_stats64 > ret_rtnl_link_stats64 {
+		u64 [out] rx_packets;
+		u64 [out] tx_packets;
+		u64 [out] rx_bytes;
+		u64 [out] tx_bytes;
+		u64  rx_errors;
+		u64  tx_errors;
+		u64 [out] rx_dropped;
+		u64 [out] multicast;
+		u64 [out] collisions;
+		u64 [out] rx_length_errors;
+		u64 [out] rx_crc_errors;
+		u64 [out] rx_frame_errors;
+		u64 [out] rx_fifo_errors;
+		u64 [out] tx_aborted_errors;
+		u64 [out] tx_fifo_errors;
+		u64 [out] tx_window_errors;
+	}
+	projection < struct net_device > net_device {
+	}
+	projection < struct rtnl_link_stats64 > rtnl_link_stats64 {
+		u64 [out] rx_packets;
+		u64 [out] tx_packets;
+		u64 [out] rx_bytes;
+		u64 [out] tx_bytes;
+		u64 [in,out] rx_errors;
+		u64 [in,out] tx_errors;
+		u64 [out] rx_dropped;
+		u64 [out] multicast;
+		u64 [out] collisions;
+		u64 [out] rx_length_errors;
+		u64 [out] rx_crc_errors;
+		u64 [out] rx_frame_errors;
+		u64 [out] rx_fifo_errors;
+		u64 [out] tx_aborted_errors;
+		u64 [out] tx_fifo_errors;
+		u64 [out] tx_window_errors;
+	}
+}
+rpc_ptr u64  alx_fix_features( projection net_device [in] *netdev, u64  features ) {
+	projection < struct net_device > net_device {
+		unsigned int [in] mtu;
+	}
+}
+projection < struct net_device_ops > _global_net_device_ops {
+	rpc_ptr alx_change_mtu ndo_change_mtu;
+	rpc_ptr alx_fix_features ndo_fix_features;
+	rpc_ptr alx_get_stats64 ndo_get_stats64;
+	rpc_ptr alx_ioctl ndo_do_ioctl;
+	rpc_ptr alx_open ndo_open;
+	rpc_ptr alx_set_mac_address ndo_set_mac_address;
+	rpc_ptr alx_set_rx_mode ndo_set_rx_mode;
+	rpc_ptr alx_start_xmit ndo_start_xmit;
+	rpc_ptr alx_stop ndo_stop;
+	rpc_ptr alx_tx_timeout ndo_tx_timeout;
+	rpc_ptr eth_validate_addr ndo_validate_addr;
+}
+projection < struct pci_driver > _global_pci_driver {
+	array<pci_device_id*, null> id_table;
+	char* [in] name;
+	projection driver driver;
+	projection dynids dynids;
+	projection node node;
+	rpc_ptr alx_probe probe;
+	rpc_ptr alx_remove remove;
+}
+
+
+}

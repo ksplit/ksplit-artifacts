@@ -1,0 +1,222 @@
+// Sync stubs for boundary functions
+module kernel {
+rpc int  __rtnl_link_register( projection _global_rtnl_link_ops [in,out] ops ) {
+}
+rpc void  __rtnl_link_unregister( projection _global_rtnl_link_ops [in,out] ops ) {
+}
+rpc projection ret_net_device*  alloc_netdev_mqs( int  sizeof_priv, string   *name, unsigned char  name_assign_type, rpc_ptr setup  setup, unsigned int  txqs, unsigned int  rxqs ) {
+	projection < struct net_device > ret_net_device {
+		array< char, 16>  name;
+		int [out] group;
+		unsigned int  priv_flags;
+		unsigned short [out] padded;
+		unsigned char [out] name_assign_type;
+		unsigned int [out] num_rx_queues;
+		unsigned int [out] real_num_rx_queues;
+		unsigned int [out] num_tx_queues;
+		unsigned int [out] real_num_tx_queues;
+		u64  tx_queue_len;
+		int*  pcpu_refcnt;
+		unsigned int [out] gso_max_size;
+		unsigned short [out] gso_max_segs;
+	}
+}
+rpc void  consume_skb( projection sk_buff [in] *skb ) {
+		projection < struct users> users {
+			int [in,out] counter;
+		}
+	projection < struct sk_buff > sk_buff {
+		projection sk_buff_net_device* dev;
+		array< char, 48> [in] cb;
+		u64 [in,out] _skb_refdst;
+		unsigned char [in] cloned : 1;
+		unsigned char [in] nohdr : 1;
+		unsigned char [in] fclone : 2;
+		unsigned char [in] head_frag : 1;
+		unsigned char [in] private : 1;
+		unsigned int [in] end;
+		unsigned char* [in] head;
+		projection users users;
+	}
+	projection < struct net_device > sk_buff_net_device {
+		array< char, 16> [in] name;
+		char* [in] ifalias;
+		u64 [in] mem_end;
+		u64 [in] mem_start;
+	}
+}
+rpc_ptr int  dummy_init_module(  ) {
+}
+rpc void  ether_setup( projection net_device [in] *dev ) {
+	projection < struct net_device > net_device {
+		unsigned int [out] flags;
+		unsigned int [in,out] priv_flags;
+		unsigned int [out] mtu;
+		unsigned short [out] type;
+		unsigned short [out] hard_header_len;
+		unsigned char [out] addr_len;
+		array< unsigned char, 32> [in] broadcast;
+		u64 [out] tx_queue_len;
+	}
+}
+rpc void  free_netdev( projection net_device [in] *dev ) {
+	projection < struct net_device > net_device {
+		unsigned short [in] padded;
+		int* [in,out] pcpu_refcnt;
+		unsigned int [in,out] reg_state : 8;
+	}
+}
+rpc void  free_percpu( void  *ptr ) {
+}
+rpc void  netif_carrier_off( projection net_device [in] *dev ) {
+	projection < struct net_device > net_device {
+		unsigned int [in] reg_state : 8;
+	}
+}
+rpc void  netif_carrier_on( projection net_device [in] *dev ) {
+	projection < struct net_device > net_device {
+		u64 [in] state;
+		projection _global_net_device_ops* netdev_ops;
+		int [in,out] watchdog_timeo;
+		int* [in] pcpu_refcnt;
+		unsigned int [in] reg_state : 8;
+	}
+}
+rpc int  register_netdevice( projection net_device [in] *dev ) {
+		projection < struct watchdog_timer> watchdog_timer {
+			u64 [out] data;
+		}
+		projection < struct dev> dev {
+			char* [in] init_name;
+			void* [in] platform_data;
+			void* [in] driver_data;
+			long long unsigned int* [in] dma_mask;
+			u64 [in] coherent_dma_mask;
+			u64 [in] dma_pfn_offset;
+			unsigned int [in] devt;
+			unsigned int [in] id;
+			bool [in] offline_disabled : 1;
+			bool [in] offline : 1;
+		}
+	projection < struct net_device > net_device {
+		array< char, 16> [in] name;
+		u64 [in] state;
+		u64 [in,out] features;
+		u64 [in,out] hw_features;
+		u64 [in,out] wanted_features;
+		u64 [in,out] vlan_features;
+		u64 [in,out] hw_enc_features;
+		u64 [in,out] mpls_features;
+		u64 [in] gso_partial_features;
+		int [in,out] ifindex;
+		projection _global_net_device_ops* netdev_ops;
+		unsigned int [in] flags;
+		array< unsigned char, 32> [in] perm_addr;
+		unsigned char [in] addr_assign_type;
+		unsigned char [in] addr_len;
+		unsigned char* [in,out] dev_addr;
+		unsigned int [in] num_tx_queues;
+		projection watchdog_timer watchdog_timer;
+		int* [in] pcpu_refcnt;
+		unsigned int [in,out] reg_state : 8;
+		unsigned int [in] rtnl_link_state : 16;
+		projection dev dev;
+		projection _global_rtnl_link_ops* rtnl_link_ops;
+	}
+}
+rpc void  rtnl_link_unregister( projection _global_rtnl_link_ops [in,out] ops ) {
+}
+rpc void  rtnl_lock(  ) {
+}
+rpc void  rtnl_unlock(  ) {
+}
+rpc int  eth_validate_addr( projection net_device [in] *dev ) {
+	projection < struct net_device > net_device {
+		unsigned char* [in] dev_addr;
+	}
+}
+rpc int  eth_mac_addr( projection net_device [in] *dev, void  *p ) {
+	projection < struct net_device > net_device {
+		u64 [in] state;
+		unsigned int [in] priv_flags;
+		unsigned char* [in] dev_addr;
+	}
+}
+rpc_ptr void  dummy_setup( projection net_device [in] *dev ) {
+	projection < struct net_device > net_device {
+		u64 [in,out] features;
+		u64 [in,out] hw_features;
+		u64 [in,out] hw_enc_features;
+		unsigned int [in,out] flags;
+		unsigned int [in,out] priv_flags;
+		unsigned char [out] addr_assign_type;
+		unsigned char* [in,out] dev_addr;
+	}
+}
+rpc_ptr void  dummy_get_drvinfo( projection net_device [unused] *dev, projection ethtool_drvinfo [in] *info ) {
+	projection < struct net_device > net_device {
+	}
+	projection < struct ethtool_drvinfo > ethtool_drvinfo {
+		array< char, 32> [in] driver;
+		array< char, 32> [in] version;
+	}
+}
+rpc_ptr int  dummy_dev_init( projection net_device [in] *dev ) {
+	projection < struct net_device > net_device {
+	}
+}
+rpc_ptr void  dummy_dev_uninit( projection net_device [in] *dev ) {
+	projection < struct net_device > net_device {
+	}
+}
+rpc_ptr int  dummy_xmit( projection sk_buff [in] *skb, projection net_device [in] *dev ) {
+	projection < struct sk_buff > sk_buff {
+		unsigned int [in] len;
+	}
+	projection < struct net_device > net_device {
+	}
+}
+rpc_ptr void  set_multicast_list( projection net_device [unused] *dev ) {
+	projection < struct net_device > net_device {
+	}
+}
+rpc_ptr projection ret_rtnl_link_stats64*  dummy_get_stats64( projection net_device [in] *dev, projection rtnl_link_stats64 [in] *stats ) {
+	projection < struct rtnl_link_stats64 > ret_rtnl_link_stats64 {
+		u64  tx_packets;
+		u64  tx_bytes;
+	}
+	projection < struct net_device > net_device {
+	}
+	projection < struct rtnl_link_stats64 > rtnl_link_stats64 {
+		u64 [in,out] tx_packets;
+		u64 [in,out] tx_bytes;
+	}
+}
+rpc_ptr int  dummy_change_carrier( projection net_device  *dev, bool  new_carrier ) {
+	projection < struct net_device > net_device {
+	}
+}
+rpc_ptr int  dummy_validate( projection nlattr [in] **tb, projection nlattr [unused] **data ) {
+	projection < struct nlattr > nlattr {
+	}
+	projection < struct nlattr > nlattr {
+	}
+}
+projection < struct net_device_ops > _global_net_device_ops {
+	rpc_ptr dummy_change_carrier ndo_change_carrier;
+	rpc_ptr dummy_dev_init ndo_init;
+	rpc_ptr dummy_dev_uninit ndo_uninit;
+	rpc_ptr dummy_get_stats64 ndo_get_stats64;
+	rpc_ptr dummy_xmit ndo_start_xmit;
+	rpc_ptr eth_mac_addr ndo_set_mac_address;
+	rpc_ptr eth_validate_addr ndo_validate_addr;
+	rpc_ptr set_multicast_list ndo_set_rx_mode;
+}
+projection < struct rtnl_link_ops > _global_rtnl_link_ops {
+	char* [in] kind;
+	rpc_ptr dummy_setup setup;
+	rpc_ptr dummy_validate validate;
+}
+
+
+}

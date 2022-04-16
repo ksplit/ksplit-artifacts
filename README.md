@@ -32,11 +32,10 @@ https://github.com/mars-research/ksplit-cloudlab
   `master` branch.
 
 * For a more descriptive explanation and its inner details, consult the
-  cloudlab documentation on [repo based
-  profiles](https://docs.cloudlab.us/creating-profiles.html#(part._repo-based-profiles)
+  cloudlab documentation on [repo based profiles](https://docs.cloudlab.us/creating-profiles.html#(part._repo-based-profiles)
 
-* The following repositories are automatically cloned and built, once the
-  system is booted.
+* The profile git repository contains a bootstrapping script which
+  automatically clones and builds the following repositories, upon a successful bootup of the node.
   - `pdg` - Static analyses
   - `lvd-linux` - modified LVDs kernel
   - `bflank` - modified bareflank hypervisor
@@ -93,7 +92,6 @@ https://github.com/mars-research/ksplit-cloudlab
   Prerequisites subsection above to set it up manually.
 
 ### Table 1.a - 1.e Replication
-
  ```bash
  pushd /opt/ksplit/bc-files
  sudo run_benchmarks.sh # run the 10 isolated benchmarks, wait for all benchmarks to terminate
@@ -104,18 +102,11 @@ https://github.com/mars-research/ksplit-cloudlab
  popd
  ```
 
-### Table 1.f Replication
- (Vikram, gcov)
+* The remaining numbers (1.f - 1.g) are part of the manual effort.
+  Unfortunately, we do not have an automated way to replicate these numbers as
+  many of them requires domain knowledge (IDL syntax, understanding kernel -
+  driver interaction patterns to classify pointer misclassifications etc).
 
-### Table 1.g Replication
- ```bash
- cd IDL_manual_effort
- cd driver_dir
- ```
-manual compare manually written IDL with automatically generated IDL.
-
-manual IDL is prefixed with `manual_` and automatically generated IDL is prefixed with `auto_`.
- 
 ### Table 2 (Subsystem stats)
 
 Enter each subsystem's directory and run script to iterate through drivers
@@ -181,16 +172,20 @@ In `dmesg`, you should see
 
 4. Loading the test module.
 
-* Load `vmfunc_klcd` module
+* Load the microkernel module
 ```
 cd /opt/ksplit/lvd-kernel/lcd-domains
 # load lcd-domains.ko
-sudo ./scripts/mk
-# load the test module that runs marshalling overheads test
-sudo ./scripts/loadex vmfunc_klcd
+./scripts/mk
 ```
 
-* In another terminal, check the dmesg with `sudo dmesg`
+* Load the `vmfunc_klcd` module
+```
+# load the test module that runs marshalling overheads test
+./scripts/loadex vmfunc_klcd
+```
+
+* In another terminal, check the dmesg with `sudo dmesg -w`
 
 * If successful, you should see something  like
 ```

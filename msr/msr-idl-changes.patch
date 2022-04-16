@@ -1,4 +1,4 @@
---- msr_auto.idl	2022-04-15 13:56:17.326306100 -0600
+--- msr_autogen.idl	2022-04-15 13:56:17.326306100 -0600
 +++ msr_manual.idl	2022-04-15 13:57:15.811640073 -0600
 @@ -1,89 +1,106 @@
  // Sync stubs for boundary functions

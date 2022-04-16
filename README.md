@@ -220,23 +220,32 @@ test_marshal_union: 1000000 iterations of marshal union took 700801680 cycles (a
   two bc files, `msr_driver.bc` and `msr_kernel.bc`. The bc files for msr are
   available at `/opt/ksplit/bc-files/arch_x86/msr/`
 
-2) Run static analysis to generate the idl. 
+2) Run static analysis to generate the idl.
 ```bash
-pushd /local/device/bc-files/arch_x86/msr/ 
+pushd /opt/ksplit/bc-files/arch_x86/msr/
 sudo bash ../../run_nescheck.sh msr
-popd 
-```
-
-3) Copy the auto-generated idl to msr folder.
-```bash
-pushd /local/device/msr/msr_autogen/
-sudo bash copy_msr_auto_gen.sh # copy the automatic generated msr to current dir
 popd
 ```
 
-4) Patch the automatic generated IDL for necessary manual effort `sudo patch < msr.patch`.
+3) Create a new test module folder in `lvd-linux` and copy the generated IDL
+```
+pushd /opt/ksplit/lvd-linux/lcd-domains/test_mods
+mkdir msr_autogen
+# copy the auto generated idl here
+cp /opt/ksplit/bc-files/arch_x86/msr/kernel.idl msr_autogen.idl
+```
 
-5) Create entries in the configuration script and Kbuild.
+4) Patch the auto generated IDL that require manual intervention.
+```
+patch -p0 < msr-idl-changes.patch
+```
+
+5) Generate rpc stubs. If successful, this should generate `common.{c,h}`,
+`client.c`, `server.c` and a linker script.
+```
+/opt/ksplit/lcds-idl/build/idlc ./msr_autogen.idl
+```
+6) Create entries in the configuration script and Kbuild.
 - Add config entry to `/opt/ksplit/lvd-linux/lcd-domains/scripts/defaultconfig`
 ```
 msr_autogen/boot nonisolated
@@ -249,7 +258,7 @@ msr_autogen/msr_klcd nonisolated
 obj-m += msr_autogen/
 ```
 
-6) The isolated module needs a bunch of boilerplate code to bootstrap. All the
+7) The isolated module needs a bunch of boilerplate code to bootstrap. All the
 necessary files are available in this repo under `msr/msr_autogen` folder. After
 the above steps, you can copy all the files under `msr/msr_autogen` to the
 directory created in step2.
@@ -259,30 +268,30 @@ directory created in step2.
 reflected in the boilerplate code.
 
 - Before compiling the module, a few lines need to be patched in the auto-generated code.
-The patch is located at `msr/autogen_driver_changes.patch`.
+The patch is located at `msr/msr-driver-changes.patch`.
 
 ```
 cd /opt/ksplit/lvd-linux/lcd-domains/test_mods
-patch -p0 < msr/autogen_driver_changes.patch
+patch -p0 < msr/msr-driver-changes.patch
 ```
 
-7) Compile the newly auto-generated module
+8) Compile the newly auto-generated module
 ```
 cd /opt/ksplit/lvd-linux/lcd-domains/
 rm test_mods/config
 make test_mods
 ```
 
-8) Load the hypervisor. Follow step 2 under Table4 experiments above
+9) Load the hypervisor. Follow step 2 under Table4 experiments above
 
-9) Load the microkernel and msr_autogen
+10) Load the microkernel and msr_autogen
 ```
 cd /opt/ksplit/lvd-linux/lcd-domains/
 ./scripts/mk
 ./scripts/loadex msr_autogen
 ```
 
-10) Test the msr driver
+11) Test the msr driver
 ```
 sudo apt install msr-tools
 # This should trigger an msr read through the isolated driver

@@ -13,6 +13,8 @@ All the experiments are evaluated on a Dell PowerEdge R820 machine on the
 
 ### Configuring the experiment
 
+* The easiest way to setup our experiment is to use "Repository based profile".
+
 * Create an experiment profile by selecting
   `Experiments > Create Experiment profile`
 
@@ -21,11 +23,17 @@ All the experiments are evaluated on a Dell PowerEdge R820 machine on the
 ```
 https://github.com/mars-research/ksplit-cloudlab
 ```
-
 * Populate the name field and click `Create`
 
 * If successful, instantiate the created profile by clicking `Instantiate`
   button on the left pane.
+
+* *NOTE* You can select different branches on the git repository. Please select
+  `master` branch.
+
+* For a more descriptive explanation and its inner details, consult the
+  cloudlab documentation on [repo based
+  profiles](https://docs.cloudlab.us/creating-profiles.html#(part._repo-based-profiles)
 
 * The following repositories are automatically cloned and built, once the
   system is booted.

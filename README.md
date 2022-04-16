@@ -124,8 +124,8 @@ done
 
 ### Table 3 (Similarity)
 ```bash
-cd ../table_3_IDL/net/
-cd ../table_3_IDL/edac/
+cd table_3_IDL/net/
+cd table_3_IDL/edac/
 ```
 Compare the IDL between `ixgbe`, `null_net` and `alx`.
 Compare the IDL between `skx_edac` and `sb_edac`.
@@ -220,11 +220,23 @@ test_marshal_union: 1000000 iterations of marshal union took 700801680 cycles (a
   two bc files, `msr_driver.bc` and `msr_kernel.bc`. The bc files for msr are
   available at `/opt/ksplit/bc-files/arch_x86/msr/`
 
-2) Run static analysis to generate the idl. TODO: Yongzhe
+2) Run static analysis to generate the idl. 
+```bash
+pushd /local/device/bc-files/arch_x86/msr/ 
+sudo bash ../../run_nescheck.sh msr
+popd 
+```
 
-3) Copy the auto-generated idl to a new folder under `/opt/ksplit/lvd-linux/lcd-domains/test_mods/`. (e.g., `msr_autogen`)
+3) Copy the auto-generated idl to msr folder.
+```bash
+pushd /local/device/msr/msr_autogen/
+sudo bash copy_msr_auto_gen.sh # copy the automatic generated msr to current dir
+popd
+```
 
-4) Create entries in the configuration script and Kbuild.
+4) Patch the automatic generated IDL for necessary manual effort `sudo patch < msr.patch`.
+
+5) Create entries in the configuration script and Kbuild.
 - Add config entry to `/opt/ksplit/lvd-linux/lcd-domains/scripts/defaultconfig`
 ```
 msr_autogen/boot nonisolated
@@ -237,7 +249,7 @@ msr_autogen/msr_klcd nonisolated
 obj-m += msr_autogen/
 ```
 
-5) The isolated module needs a bunch of boilerplate code to bootstrap. All the
+6) The isolated module needs a bunch of boilerplate code to bootstrap. All the
 necessary files are available in this repo under `msr/msr_autogen` folder. After
 the above steps, you can copy all the files under `msr/msr_autogen` to the
 directory created in step2.
@@ -254,23 +266,23 @@ cd /opt/ksplit/lvd-linux/lcd-domains/test_mods
 patch -p0 < msr/autogen_driver_changes.patch
 ```
 
-6) Compile the newly auto-generated module
+7) Compile the newly auto-generated module
 ```
 cd /opt/ksplit/lvd-linux/lcd-domains/
 rm test_mods/config
 make test_mods
 ```
 
-7) Load the hypervisor. Follow step 2 under Table4 experiments above
+8) Load the hypervisor. Follow step 2 under Table4 experiments above
 
-8) Load the microkernel and msr_autogen
+9) Load the microkernel and msr_autogen
 ```
 cd /opt/ksplit/lvd-linux/lcd-domains/
 ./scripts/mk
 ./scripts/loadex msr_autogen
 ```
 
-9) Test the msr driver
+10) Test the msr driver
 ```
 sudo apt install msr-tools
 # This should trigger an msr read through the isolated driver

@@ -220,6 +220,15 @@ Running marshal_union test!
 test_marshal_union: 1000000 iterations of marshal union took 700801680 cycles (avg: 700 cycles)
 ```
 
+### Estimated Runtime
+* setup -> 30-40 minutes (one-time)
+* table1 -> ~1 hour
+* table2 -> 5-6 hours
+* table3 -> 1-2 hours (manual effort)
+* table4 -> 10-20 minutes
+* End-to-End example -> 1-2 hours
+
+
 ### End-to-End examples
 
 #### `msr` driver

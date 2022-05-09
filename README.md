@@ -107,12 +107,27 @@ git clone https://github.com/mars-research/ksplit-cloudlab.git /local/respositor
  ```bash
  pushd /opt/ksplit/bc-files
  sudo ./run_benchmarks.sh # run the 10 isolated benchmarks, wait for all benchmarks to terminate
+ ```
+
+* The above step runs the analysis in the background and should take 1-2 hours
+  to complete. As a sanity check you can run this snippet to check if the
+  necessary files are generated before proceeding to the next step.
+
+  ```
+  find . -name "table1" | wc -l
+  ```
+  - If all the files are generated, the above `find` should find 10 files (for 10 drivers).
+ 
+
+* Once the analysis is complete, we can collect the numbers and organize it into a csv
+ ```
  sudo ./collect_benchmarks.sh # after all experiments finish, collect the stats
  pushd benchmark_stats # the experiment number for each benchmark is included in the corresponding file name (dummy is null_net).
  sudo python3 merge_to_csv.py # merge all the benchmark stats into one file "merged_stats.csv"
  popd
  popd
  ```
+
 * The `merge_to_csv.py` should aggregate all the stats into `merged_stats.csv`.
   The format is similar to our Table1 on paper. Inorder to visually compare,
   one can paste the `merged_stats.csv` into a csv viewer (e.g., google sheets).

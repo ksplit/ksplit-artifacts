@@ -107,12 +107,15 @@ git clone https://github.com/mars-research/ksplit-cloudlab.git /local/respositor
  ```bash
  pushd /opt/ksplit/bc-files
  sudo ./run_benchmarks.sh # run the 10 isolated benchmarks, wait for all benchmarks to terminate
- sudo bash collect_benchmarks.sh # after all experiments finish, collect the stats
+ sudo ./collect_benchmarks.sh # after all experiments finish, collect the stats
  pushd benchmark_stats # the experiment number for each benchmark is included in the corresponding file name (dummy is null_net).
  sudo python3 merge_to_csv.py # merge all the benchmark stats into one file "merged_stats.csv"
  popd
  popd
  ```
+* The `merge_to_csv.py` should aggregate all the stats into `merged_stats.csv`.
+  The format is similar to our Table1 on paper. Inorder to visually compare,
+  one can paste the `merged_stats.csv` into a csv viewer (e.g., google sheets).
 
 * The remaining numbers (1.f - 1.g) are part of the manual effort.
   Unfortunately, we do not have an automated way to replicate these numbers as

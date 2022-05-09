@@ -106,7 +106,7 @@ git clone https://github.com/mars-research/ksplit-cloudlab.git /local/respositor
 ### Table 1.a - 1.e Replication
  ```bash
  pushd /opt/ksplit/bc-files
- sudo run_benchmarks.sh # run the 10 isolated benchmarks, wait for all benchmarks to terminate
+ sudo ./run_benchmarks.sh # run the 10 isolated benchmarks, wait for all benchmarks to terminate
  sudo bash collect_benchmarks.sh # after all experiments finish, collect the stats
  pushd benchmark_stats # the experiment number for each benchmark is included in the corresponding file name (dummy is null_net).
  sudo python3 merge_to_csv.py # merge all the benchmark stats into one file "merged_stats.csv"

@@ -181,6 +181,12 @@ cd table_3_IDL/edac/
 Compare the IDL between `ixgbe`, `null_net` and `alx`.
 Compare the IDL between `skx_edac` and `sb_edac`.
 
+**Shared rpc comparison**: compare rpc stubs (function start with rpc/rpc_ptr) among the IDLs and count the common ones.
+**Shared rpcs IDL delta**: compare the rpc stubs and count the different ones.
+**Shared rpcs Annotation**: compare the annotations among the IDLs and count the differences.
+**New IDL**: Count the IDL difference between the referenced IDL and the comparison IDL. The IDLs exist in the compared IDL but do not exist in the referenced IDL are considered as new IDL. For example, the referenced IDL is ixgbe and the null_net IDL is used for comparison. Then, we go through the IDL code in the null_net IDL and then find the part of code that are not exist in the ixgbe. The lines of these code are counted as new IDL.
+
+
 ### Table 4
 1. Following the above steps, the node should be running the `4.8.4-lvd` kernel.
 ```

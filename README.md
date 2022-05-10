@@ -139,15 +139,35 @@ git clone https://github.com/mars-research/ksplit-cloudlab.git /local/respositor
 
 ### Table 2 (Subsystem stats)
 
-Enter each subsystem's directory and run script to iterate through drivers
+* By invoking the below snippet, we collect stats for each of the subsystems
 
 ```bash
-for subsys in char tty block net edac hwmon spi i2c usb; do
+for subsys in block net_ethernet edac hwmon usb; do
   pushd ${subsys};
   sudo bash ../run_subsystem.sh # run ksplit analysis on all the drivers in the subsystem
-  sudo python3 ../summarize_module_stats.py # summarize the average number for all the drivers in the subsystem into file stats_summary
   popd;
 done
+```
+* The above snippet should take around 5-6 hours to finish. Upon completion,
+  running the below script would accumulate summarize all the individual stats
+  into a summary file for the subsystem.
+
+```bash
+for subsys in block net_ethernet edac hwmon usb; do
+  pushd ${subsys};
+  sudo python3 ../summarize_module_stats.py
+  popd;
+done
+```
+
+* The `merge_to_csv_table2.py` should aggregate all the stats into `merged_stats_table2.csv`.
+  The format is similar to our Table2 on paper. Inorder to visually compare,
+  one can paste the `merged_stats_table2.csv` into a csv viewer (e.g., google sheets).
+```
+ sudo ./collect_table2.sh # after all experiments finish, collect the stats
+ pushd benchmark_stats/table2 # the experiment number for each benchmark is included in the corresponding file name (dummy is null_net).
+ sudo python3 merge_to_csv_table2.py # merge all the benchmark stats into one file "merged_stats.csv"
+ popd
 ```
 
 ### Table 3 (Similarity)

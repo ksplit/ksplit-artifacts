@@ -169,7 +169,7 @@ done
 ```
  sudo ./collect_table2.sh
  pushd benchmark_stats/table2
- sudo python3 merge_to_csv_table2.py
+ sudo python3 ../merge_to_csv_table2.py
  popd
 ```
 

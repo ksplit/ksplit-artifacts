@@ -1,6 +1,6 @@
 diff -Naur msr_autogen.orig/client.c msr_autogen/client.c
---- msr_autogen.orig/client.c	2022-04-15 14:02:09.640850369 -0500
-+++ msr_autogen/client.c	2022-04-15 14:11:17.140851710 -0500
+--- msr_autogen.orig/client.c	2022-05-20 09:00:44.944356033 -0500
++++ msr_autogen/client.c	2022-05-20 04:47:17.828444811 -0500
 @@ -4,6 +4,8 @@
  
  #include <lcd_config/post_hook.h>
@@ -10,7 +10,7 @@ diff -Naur msr_autogen.orig/client.c msr_autogen/client.c
  struct class* __class_create(struct module* owner, char const* name, struct lock_class_key* key)
  {
  	struct fipc_message __buffer = {0};
-@@ -442,7 +444,7 @@
+@@ -469,7 +471,7 @@
  	}
  }
  
@@ -19,7 +19,7 @@ diff -Naur msr_autogen.orig/client.c msr_autogen/client.c
  {
  	struct fipc_message __buffer = {0};
  	struct fipc_message *__msg = &__buffer;
-@@ -1396,11 +1398,16 @@
+@@ -1477,11 +1479,16 @@
  	return ret;
  }
  
@@ -37,8 +37,8 @@ diff -Naur msr_autogen.orig/client.c msr_autogen/client.c
  		shared_mem_init();
  		break;
 diff -Naur msr_autogen.orig/common.h msr_autogen/common.h
---- msr_autogen.orig/common.h	2022-04-15 14:02:09.640850369 -0500
-+++ msr_autogen/common.h	2022-04-15 14:11:53.390851799 -0500
+--- msr_autogen.orig/common.h	2022-05-20 09:00:44.934355864 -0500
++++ msr_autogen/common.h	2022-05-20 08:26:14.582748670 -0500
 @@ -32,7 +32,7 @@
  
  #ifndef LCD_ISOLATE
@@ -48,10 +48,62 @@ diff -Naur msr_autogen.orig/common.h msr_autogen/common.h
  
  #else
  #define glue_unpack_rpc_ptr(pos, msg, ext, name) NULL; glue_user_panic("Trampolines cannot be used on LCD side")
+@@ -153,34 +153,43 @@
+ 
+ static inline void glue_mark_visited(struct glue_visit_list* visited, const void* ptr)
+ {
++#if 0
+ 	if (visited->size + 1 > visited->capacity) {
+ 		visited->capacity *= 2;
+ 		visited->values = krealloc(visited->values, visited->capacity * sizeof(void*), GFP_KERNEL);
+ 	}
+ 
+ 	visited->values[visited->size++] = ptr;
++#endif
+ }
+ 
+ static inline struct glue_visit_list glue_create_visit_list(void)
+ {
+ 	struct glue_visit_list visited = {0};
++#if 0
+ 	visited.capacity = 1;
+ 	visited.values = kzalloc(sizeof(void*), GFP_KERNEL);
++#endif
+ 	return visited;
+ }
+ 
+ static inline void glue_free_visit_list(struct glue_visit_list* visited)
+ {
++#if 0
+ 	kfree(visited->values);
++#endif
+ }
+ 
+ static inline void glue_clear_visit_list(struct glue_visit_list* visited)
+ {
++#if 0
+ 	visited->size = 0;
++#endif
+ }
+ 
+ static inline bool glue_should_visit(struct glue_visit_list* visited, const void* ptr)
+ {
++#if 0
+ 	int i;
+ 	if (!ptr)
+ 		return 0;
+@@ -192,6 +201,7 @@
+ 
+ 	glue_mark_visited(visited, ptr);
+ 
++#endif
+ 	return 1;
+ }
+ 
 diff -Naur msr_autogen.orig/server.c msr_autogen/server.c
---- msr_autogen.orig/server.c	2022-04-15 14:02:09.640850369 -0500
-+++ msr_autogen/server.c	2022-04-15 14:11:38.520851763 -0500
-@@ -439,7 +439,7 @@
+--- msr_autogen.orig/server.c	2022-05-20 09:00:44.944356033 -0500
++++ msr_autogen/server.c	2022-05-20 04:47:17.828444811 -0500
+@@ -484,7 +484,7 @@
  	return impl(target, dev, mode);
  }
  
@@ -60,7 +112,7 @@ diff -Naur msr_autogen.orig/server.c msr_autogen/server.c
  {
  	size_t n_pos = 0;
  	size_t* __pos = &n_pos;
-@@ -1480,7 +1480,7 @@
+@@ -1588,7 +1588,7 @@
  
  	case RPC_ID_device_create:
  		glue_user_trace("device_create\n");

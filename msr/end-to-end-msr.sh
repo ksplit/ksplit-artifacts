@@ -21,6 +21,12 @@ LCD_KO="${MSR_AUTOGEN_BUILD_DIR}/msr_lcd/lcd_test_mod_msr_autogen_msr_lcd.ko"
 
 IDLC_BIN="${BASE_DIR}/lcds-idl/build/idlc"
 
+chown() {
+  USER=$(id -u -n)
+  GROUP=$(id -g -n)
+  sudo chown -R ${USER}:${GROUP} ${BASE_DIR}
+}
+
 generate_idl() {
 	pushd ${MSR_BC}
 	sudo ../../run_nescheck.sh msr
@@ -106,6 +112,7 @@ test_module() {
 	fi
 }
 
+chown
 generate_idl
 autogen_module
 prepare_module

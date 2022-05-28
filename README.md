@@ -23,7 +23,7 @@ All the experiments are evaluated on a Dell PowerEdge R820 machine on the
 * Select `Git Repo` and use this repository. The profile comes pre-installed
   with source code for evaluating ksplit's static analysis.
 ```
-https://github.com/mars-research/ksplit-cloudlab
+https://github.com/ksplit/ksplit-cloudlab
 ```
 * Populate the name field and click `Create`
 
@@ -68,7 +68,7 @@ https://github.com/mars-research/ksplit-cloudlab
 * A detailed log is available at `/users/geniuser/ksplit-verbose.log`
 
 * The script that gets executed after startup is available
-  [here](https://github.com/mars-research/ksplit-cloudlab/blob/ksplit-test/ksplit-top.sh)
+  [here](https://github.com/ksplit/ksplit-cloudlab/blob/ksplit-test/ksplit-top.sh)
 
 * *NOTE* The automated script is executed by a different user (`geniuser`). If
   you need to manually build something under `/opt/ksplit` make sure to change
@@ -83,7 +83,7 @@ https://github.com/mars-research/ksplit-cloudlab
 ```
 mkdir /local
 # make sure you have permissions or use chown
-git clone https://github.com/mars-research/ksplit-cloudlab.git /local/respository
+git clone https://github.com/ksplit/ksplit-cloudlab.git /local/respository
 # invoke the top level script
 /local/respository/ksplit-top.sh
 ```
@@ -95,7 +95,7 @@ git clone https://github.com/mars-research/ksplit-cloudlab.git /local/respositor
   aforementioned steps (i.e., using the git repo for creating the profile).
 
 * To create this setup manually,
-  - Clone https://github.com/mars-research/ksplit-cloudlab
+  - Clone https://github.com/ksplit/ksplit-cloudlab
   - Make sure `/opt/ksplit` is writable
   - Execute `ksplit-top.sh`
 
@@ -107,7 +107,7 @@ git clone https://github.com/mars-research/ksplit-cloudlab.git /local/respositor
   this path hardcoded.
 ```
 cd ${HOME}
-git clone https://github.com/mars-research/ksplit-artifacts.git
+git clone https://github.com/ksplit/ksplit-artifacts.git
 ```
 
 ### Table 1.a - 1.e Replication
